@@ -1,0 +1,67 @@
+body{
+    background-image: url('../img/thumb-1920-369573.jpg');
+   
+}
+.my-form{
+    width: 50%;
+    margin: auto;
+   
+    padding: 1em;
+}
+.my-form-padding{
+    padding:3em 5em;
+}
+.my-input{
+    border-color:#00BCD4;
+    border-radius: 15px;
+    background-color: transparent;
+}
+.my-container{
+    margin:auto;margin-top: 5%;
+    background-color:rgb(255, 255, 255,0.89);
+    padding: 4em;
+}
+
+.my-button{
+    width: 100%;margin: auto;
+}
+
+#form-header{
+    
+    margin-bottom: 1em;
+}
+
+@media only screen and (min-width : 200px) {
+    .my-container-width{
+    width:70%;
+    }
+      
+}
+
+/* Custom, iPhone Retina */ 
+@media only screen and (min-width : 320px) {
+    
+}
+
+/* Extra Small Devices, Phones equivalent to class xs */ 
+@media only screen and (min-width : 480px) {
+   .my-container-width{
+    width:60%;
+    }
+}
+
+/* Small Devices, Tablets equivalent to class sm */
+@media only screen and (min-width : 768px) {
+   .my-container-width{
+    width:45%;
+    }
+}
+
+/* Medium Devices, Desktops equivalent to class md */
+@media only screen and (min-width : 992px) {
+   .my-container-width{
+    width:30%;
+    }
+}
+
+/* Large Devices, Wide Screens equivalent to class lg */
