@@ -18,7 +18,11 @@
 
         
 
+<<<<<<< HEAD
         <p>This sht work's</p>
+=======
+        <p>test</p>
+>>>>>>> acd354a463d9bbf3e6aac74816abe5924422a9cc
      
 
 
