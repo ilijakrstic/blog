@@ -23,7 +23,7 @@
     
     <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>
     <bean class="com.blog.controller.LoginController"/>
-    <bean class="com.blog.controller.IndexController"/>
+    <bean class="com.blog.controller.RegistrationController"/>
     
 
     <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
@@ -49,5 +49,9 @@
      <bean name="loginController"
           class="org.springframework.web.servlet.mvc.ParameterizableViewController"
           p:viewName="login" />
+     
+      <bean name="registrationController"
+          class="org.springframework.web.servlet.mvc.ParameterizableViewController"
+          p:viewName="registration" />
 
 </beans>

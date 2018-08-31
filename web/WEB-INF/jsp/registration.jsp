@@ -1,13 +1,17 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <base href="../resource/"/> <!-- Stavio sam base na resources pa da posle nekucam  celu putanju za svaki el pa mozda u nb pravi problem pa vidi ak nece-->
+    <base href="<spring:url value="/resource/"/>"/> <!-- Stavio sam base na resources pa da posle nekucam  celu putanju za svaki el pa mozda u nb pravi problem pa vidi ak nece-->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Starter Template Bootstrap</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="style/registration.css">
+	<link href="<spring:url value="style/registration.css"/>" rel="stylesheet" type="text/css"/>
+        <script type="text/javascript"  src="<spring:url value="/resource/script/jquery-3.3.1.js"/>"></script>
 </head>
 <body>
     
