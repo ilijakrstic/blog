@@ -49,10 +49,10 @@ public class User implements Serializable {
     @Pattern(regexp = "^[a-zA-Z0-9]{5,25}$",message = "korisnicko ime moze da sadrzi izmedju 5 i 25 karaktera")
     @Column(name = "user_name")
     private String userName;
-    @Pattern(regexp = "^[a-zA-Z]{2,45}$",message = "ime moze da sadrzi samo slova ")
+    @Pattern(regexp = "^[a-zA-Z]{2,45}$",message = "ime nije validno")
     @Column(name = "first_name")
     private String firstName;
-    @Pattern(regexp = "^[a-zA-Z]{2,45}$",message = "prezime moze da sadrzi samo slova ")
+    @Pattern(regexp = "^[a-zA-Z]{2,45}$",message = "prezime nije validno")
     @Column(name = "last_name")
     private String lastName;
     @Pattern(regexp = "[^\\ ]{5,256}",message = "lozinka mora da sadrzi minimum 5 karaktera")
@@ -62,7 +62,7 @@ public class User implements Serializable {
     @Column(name = "email")
     private String email;
     @Column(name="date_of_birth")
-    @NotNull(message = "datum ne moze biti prazan")
+    @NotNull(message = "datum rodjenja nije validan")
     @DateTimeFormat(pattern = "yyyy-MM-dd",iso = DateTimeFormat.ISO.DATE)
     @Temporal(TemporalType.DATE)
     private Date dateOfBirth;
