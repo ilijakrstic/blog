@@ -3,67 +3,36 @@ package com.blog.model;
 import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional(propagation = Propagation.REQUIRED,readOnly = false)
 public class UserDAO {
 
-    static User user = null;
-    static List list;
+    
+    @Autowired
+    SessionFactory sessionFactory;
 
-    public static User getUserById(int id) {
+    public  User getUserById(int id) {
 
-        Session session = HibernateUtil.createSessionFactory().openSession();
-        Transaction tx = null;
-
-        try {
-            tx = session.beginTransaction();
-
-            List list = session.createCriteria(User.class).add(Restrictions.eq("id", id)).list();
-
-            if (!list.isEmpty()) {
-                user = (User) list.get(0);
-            }
-            
-            tx.commit();
-        } catch (HibernateException e) {
-            if (tx != null) {
-                tx.rollback();
-            }
-            System.out.println(e);
-        } finally {
-            HibernateUtil.close();
-        }
-
+        Session session = sessionFactory.getCurrentSession();
+        
+        User user = (User) session.get(User.class, id);
+        
         return user;
 
     }
 
-    public static User getUserByEmail(String email) {
+    public  User getUserByEmail(String email) {
 
-        Session session = HibernateUtil.createSessionFactory().openSession();
-        Transaction tx = null;
+         Session session = sessionFactory.getCurrentSession();
 
-        try {
-            tx = session.beginTransaction();
-
-            list = session.createCriteria(User.class).add(Restrictions.eq("email", email)).list();
-            System.out.println(list.size());
-            if (!list.isEmpty()) {
-                user = (User)list.get(0);
-            }
-
-            tx.commit();
-        } catch (HibernateException e) {
-            if (tx != null) {
-                tx.rollback();
-            }
-            System.out.println(e);
-        } finally {
-            HibernateUtil.close();
-        }
-        
-        
+       
+         User user = (User) session.getNamedQuery("User.findByEmail").setString("email", email).uniqueResult();
 
         return user;
 
