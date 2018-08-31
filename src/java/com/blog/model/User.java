@@ -1,6 +1,9 @@
 package com.blog.model;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -13,8 +16,12 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "users")
@@ -39,35 +46,32 @@ public class User implements Serializable {
     @Basic(optional = false)
     @Column(name = "user_id")
     private Integer userId;
-    @Size(max = 15)
+    @Pattern(regexp = "^[a-zA-Z0-9]{5,25}$",message = "korisnicko ime moze da sadrzi izmedju 5 i 25 karaktera")
     @Column(name = "user_name")
     private String userName;
-    @Size(max = 45)
+    @Pattern(regexp = "^[a-zA-Z]{2,45}$",message = "ime moze da sadrzi samo slova ")
     @Column(name = "first_name")
     private String firstName;
-    @Size(max = 45)
+    @Pattern(regexp = "^[a-zA-Z]{2,45}$",message = "prezime moze da sadrzi samo slova ")
     @Column(name = "last_name")
     private String lastName;
-    @Size(max = 256)
+    @Pattern(regexp = "[^\\ ]{5,256}",message = "lozinka mora da sadrzi minimum 5 karaktera")
     @Column(name = "password")
     private String password;
-    @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
-    @Size(max = 45)
+    @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="email nije validan")//if the field contains email address consider using this annotation to enforce field validation
     @Column(name = "email")
     private String email;
-    @Column(name = "date_of_birth")
+    @Column(name="date_of_birth")
+    @NotNull(message = "datum ne moze biti prazan")
+    @DateTimeFormat(pattern = "yyyy-MM-dd",iso = DateTimeFormat.ISO.DATE)
     @Temporal(TemporalType.DATE)
     private Date dateOfBirth;
-    @Size(max = 45)
     @Column(name = "gender")
     private String gender;
-    @Size(max = 1024)
     @Column(name = "picture")
     private String picture;
-    @Size(max = 256)
     @Column(name = "state")
     private String state;
-    @Size(max = 520)
     @Column(name = "city")
     private String city;
 
@@ -131,7 +135,8 @@ public class User implements Serializable {
     }
 
     public void setDateOfBirth(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
+        
+      this.dateOfBirth = dateOfBirth;
     }
 
     public String getGender() {

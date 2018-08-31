@@ -26,7 +26,7 @@
                         <p>Dobrodosli</p>
                     </div>
 
-                    <form id="login-form" class="text-center" action="/blog/index.html" method="POST">
+                    <form id="login-form" class="text-center" action="/blog/login" method="POST">
 
                         <!-- Error class is for show error after failed login-->
                         <input type="email" name="userEmail" class="form-control" placeholder="E-mail">                 
