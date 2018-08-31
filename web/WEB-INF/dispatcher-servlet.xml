@@ -22,7 +22,8 @@
     <mvc:resources mapping="/resource/**" location="/resource/"/> <!-- Mapiranje za resurce i anotacije -->
     
     <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>
-    
+    <bean class="com.blog.controller.LoginController"/>
+    <bean class="com.blog.controller.IndexController"/>
     
 
     <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
