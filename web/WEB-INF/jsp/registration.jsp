@@ -43,30 +43,18 @@
                     <form:input type="date" path="dateOfBirth" id="date" class="form-control my-input" />
                       <form:errors path="dateOfBirth" cssClass="errors"/>
                 </div>
-                <div class="form-group">
-                   
-                    <select name="gender" id="gender" class="form-control my-input">
-                        <option value="">izaberite pol</option>
-                        <option value="male">Musko</option>
-                        <option value="female">Zensko</option>
-                    </select>
-                </div>
-             <div class="form-group">
-                   
-                    <select name="country" id="country" class="form-control my-input">
-                        <option value="" selected>drzava </option>
-                        <option value="srbija">Srbija</option>
-                        <option value="nemacka">Nemacka</option>
-                    </select>
-                </div>
-                 <div class="form-group">
-                   
-                    <select name="city" id="city" class="form-control my-input">
-                        <option value="-1" selected>grad</option>
-                        <option value="2">Male</option>
-                        <option value="3">Female</option>
-                    </select>
-                </div>
+               
+             <div class="form-group">              
+                 <form:select path="countryId" id="country" class="form-control my-input">
+                     <form:option value="-1" label="izaberi drzavu"/>
+   
+                     <c:forEach items="${countries}"  var="c">
+                            <form:option value="${c}" label="${c.getCountryName()}"/>
+                     </c:forEach>
+                 </form:select>
+              </div>
+                
+                
                 
                 
                 <button type="submit" class="btn btn-outline-info my-button" >Potvrdi</button>

@@ -11,6 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -36,9 +38,21 @@ import org.springframework.format.annotation.DateTimeFormat;
     , @NamedQuery(name = "User.findByDateOfBirth", query = "SELECT u FROM User u WHERE u.dateOfBirth = :dateOfBirth")
     , @NamedQuery(name = "User.findByGender", query = "SELECT u FROM User u WHERE u.gender = :gender")
     , @NamedQuery(name = "User.findByPicture", query = "SELECT u FROM User u WHERE u.picture = :picture")
-    , @NamedQuery(name = "User.findByState", query = "SELECT u FROM User u WHERE u.state = :state")
-    , @NamedQuery(name = "User.findByCity", query = "SELECT u FROM User u WHERE u.city = :city")})
+    })
 public class User implements Serializable {
+
+    @Size(max = 45)
+    @Column(name = "gender")
+    private String gender;
+   
+    @JoinColumn(name = "country_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Country countryId;
+
+   // @Pattern(regexp = "^[1-9]\\d*$",message = "odaberite drzavu")
+   
+   // @Pattern(regexp = "^[1-9]\\d*$",message = "odaberite grad")
+   
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -66,18 +80,16 @@ public class User implements Serializable {
     @DateTimeFormat(pattern = "yyyy-MM-dd",iso = DateTimeFormat.ISO.DATE)
     @Temporal(TemporalType.DATE)
     private Date dateOfBirth;
-    @Column(name = "gender")
-    private String gender;
     @Column(name = "picture")
     private String picture;
-    @Column(name = "state")
-    private String state;
-    @Column(name = "city")
-    private String city;
+    
 
     public User() {
     }
-
+        
+    
+    public enum Gender{MUSKI,ZENSKI}
+    
     public User(Integer userId) {
         this.userId = userId;
     }
@@ -139,13 +151,8 @@ public class User implements Serializable {
       this.dateOfBirth = dateOfBirth;
     }
 
-    public String getGender() {
-        return gender;
-    }
 
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
+    
 
     public String getPicture() {
         return picture;
@@ -155,21 +162,9 @@ public class User implements Serializable {
         this.picture = picture;
     }
 
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
+  
+  
+    
 
     @Override
     public int hashCode() {
@@ -195,5 +190,22 @@ public class User implements Serializable {
     public String toString() {
         return "com.blog.model.User[ userId=" + userId + " ]";
     }
-    
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+
+    public Country getCountryId() {
+        return countryId;
+    }
+
+    public void setCountryId(Country countryId) {
+        this.countryId = countryId;
+    }
+
 }
