@@ -1,1 +1,20 @@
 
+#content-nav a{
+    color:#7f8c8d;
+    font-size:2vh;
+    font-family: Arial;
+}
+#content-nav .active{
+    color:#e74c3c;
+}
+#content-div img{ 
+    object-fit: cover;
+    width:16rem;
+    height:11rem;
+}
+.card-text{
+    color:black;
+}
+a:hover{
+    text-decoration: none
+}
