@@ -42,9 +42,7 @@ public class Country implements Serializable {
     @Size(max = 256)
     @Column(name = "country_name")
     private String countryName;
-    @Size(max = 3)
-    @Column(name = "country_code")
-    private String countryCode;
+   
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "countryId")
     private List<User> userList;
 
@@ -71,13 +69,7 @@ public class Country implements Serializable {
         this.countryName = countryName;
     }
 
-    public String getCountryCode() {
-        return countryCode;
-    }
-
-    public void setCountryCode(String countryCode) {
-        this.countryCode = countryCode;
-    }
+ 
 
     @XmlTransient
     public List<User> getUserList() {
