@@ -6,41 +6,76 @@
 <html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
         <link href="<spring:url value="/resource/style/index.css"/>" rel="stylesheet" type="text/css"/>
         <script type="text/javascript"  src="<spring:url value="/resource/script/jquery-3.3.1.js"/>"></script>
-        
+
         <title>Blog</title>
     </head>
 
     <body>
 
-        
+
         <nav class="navbar navbar-expand-md navbar-dark bg-dark ">
-            <a class="navbar-brand" href="/index">Blog</a>
+            <a class="navbar-brand" href="/index">BLOG</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapseContent" aria-controls="navbarCollapseContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapseContent" >
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                            <a class="nav-link" href="#">Home</a>
+                        <a class="nav-link" href="#">Home</a>
                     </li>
                     <li class="nav-item">
-                            <a class="nav-link" href="#">About</a>
+                        <a class="nav-link" href="#">About</a>
                     </li>
                     <li class="nav-item">
-                            <a class="nav-link" href="#">Contact</a>
+                        <a class="nav-link" href="#">Contact us`</a>
                     </li>
                 </ul>
+                <span class="navbar-text">
+                    <a href="/blog/login" style="margin:-10px" class="nav-link">Prijavi se</a>
+                </span>
             </div>
-	</nav>
+        </nav>
+        
+        <div class="jumbotron" style="padding: 0px; margin-bottom: 0px;">
+            <img src="<spring:url value="/resource/img/BudiNajboljaVerzijaSebe.jpg"/>" style="width: 100%" alt="asds">
+        </div>
+        
+        
+        <div class="container" id="content-nav">
+            
+            <nav class="nav nav-justified">
+                <a class="nav-item nav-link active" href="#">BLOG</a>
+                <a class="nav-item nav-link" href="#">HOW TO</a>
+                <a class="nav-item nav-link" href="#">TEORIJA SVEGA</a>
+                <a class="nav-item nav-link disabled" href="#">IT</a>
+            </nav>
+        </div>
+
+        <div class="container" id="content-div" style="padding-top:5%">
+            <div class="row" style="text-decoration: none">
+                <a href="#" >
+                    <div class="col-lg-4 col-md-6 col-sm-12 d-flex justify-content-center" style="padding-bottom: 20px">
+                        <div class="card text-center" style="width: 16rem;">
+                            <img class="card-img-top img-fluid" src="https://cdn.pixabay.com/photo/2015/01/15/16/16/staircase-600468_960_720.jpg">
+                            <div class="card-body">
+                                <h5 class="card-title card-text">Card title</h5>
+                                <p class="card-text card-text text-justify">Probna verzija kartice u bootstrapu</p>
+                                <a href="#" style="margin-top:10px" class="btn btn-primary">Vise</a>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>	
+        </div>
 
 
-
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
         <script type="text/javascript" src="<spring:url value="/resource/script/index.js"/>"></script>
     </body>
 </html>
