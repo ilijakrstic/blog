@@ -29,7 +29,6 @@ public class RegistrationController {
     public String getRegistration(Model model){
         model.addAttribute("user",new User());
         model.addAttribute("countries",countryDAO.getAll());
-        model.addAttribute("u",new User());
         return "registration";
     }
     
@@ -39,7 +38,7 @@ public class RegistrationController {
              model.addAttribute("countries",countryDAO.getAll());
             return "registration";
         }
-        //userDAO.saveUser(user);
+        userDAO.saveUser(user);
         
         return "success";
     }

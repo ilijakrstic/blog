@@ -39,12 +39,11 @@ public class Country implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Size(max = 256)
+    @Size(min=2,max = 256,message = "ovo polje je obazno")
     @Column(name = "country_name")
     private String countryName;
    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "countryId")
-    private List<User> userList;
+  
 
     public Country() {
     }
@@ -69,16 +68,6 @@ public class Country implements Serializable {
         this.countryName = countryName;
     }
 
- 
-
-    @XmlTransient
-    public List<User> getUserList() {
-        return userList;
-    }
-
-    public void setUserList(List<User> userList) {
-        this.userList = userList;
-    }
 
     @Override
     public int hashCode() {

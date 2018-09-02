@@ -41,18 +41,12 @@ import org.springframework.format.annotation.DateTimeFormat;
     })
 public class User implements Serializable {
 
-    @Size(max = 45)
+    
+    
+    
     @Column(name = "gender")
     private String gender;
-   
-    @JoinColumn(name = "country_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private Country countryId;
-
-   // @Pattern(regexp = "^[1-9]\\d*$",message = "odaberite drzavu")
-   
-   // @Pattern(regexp = "^[1-9]\\d*$",message = "odaberite grad")
-   
+     
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -60,6 +54,7 @@ public class User implements Serializable {
     @Basic(optional = false)
     @Column(name = "user_id")
     private Integer userId;
+
     @Pattern(regexp = "^[a-zA-Z0-9]{5,25}$",message = "korisnicko ime moze da sadrzi izmedju 5 i 25 karaktera")
     @Column(name = "user_name")
     private String userName;
@@ -83,7 +78,16 @@ public class User implements Serializable {
     @Column(name = "picture")
     private String picture;
     
-
+    @Column(name="bio")
+    @Size(min=30,message = "Ovo polje mora da sadrzi minimum 30 karaktera(pustite masti na valju)")
+    private String bio;
+    @Column(name="city")
+    @Size(min=2,max = 250,message = "ovo polje je obavezno")
+    private String city;
+    @Column(name="country")
+    @Size(min=2,max = 250,message = "ovo polje je obavezno")
+    private String country;
+    
     public User() {
     }
         
@@ -151,9 +155,6 @@ public class User implements Serializable {
       this.dateOfBirth = dateOfBirth;
     }
 
-
-    
-
     public String getPicture() {
         return picture;
     }
@@ -162,8 +163,39 @@ public class User implements Serializable {
         this.picture = picture;
     }
 
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
   
-  
+      public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
     
 
     @Override
@@ -191,21 +223,6 @@ public class User implements Serializable {
         return "com.blog.model.User[ userId=" + userId + " ]";
     }
 
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-
-    public Country getCountryId() {
-        return countryId;
-    }
-
-    public void setCountryId(Country countryId) {
-        this.countryId = countryId;
-    }
+  
 
 }

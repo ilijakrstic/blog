@@ -1,25 +1,21 @@
 body{
     background-image: url('../img/thumb-1920-369573.jpg');
-   
+    background-repeat: no-repeat;
+    background-position: center;
 }
-.my-form{
-    width: 50%;
-    margin: auto;
-   
-    padding: 1em;
-}
-.my-form-padding{
-    padding:3em 5em;
-}
+
 .my-input{
     border-color:#00BCD4;
     border-radius: 15px;
     background-color: transparent;
 }
 .my-container{
-    margin:auto;margin-top: 5%;
+    margin:auto;margin-top: 2em;margin-bottom: 2em;
     background-color:rgb(255, 255, 255,0.89);
-    padding: 4em;
+   
+}
+.my-container-padding{
+     padding: 4em;
 }
 
 .my-button{
@@ -33,35 +29,47 @@ body{
 
 @media only screen and (min-width : 200px) {
     .my-container-width{
-    width:70%;
+    width:80%;
     }
+    
+    .my-container-padding{
+     padding: 1em;
+}
       
 }
 
 /* Custom, iPhone Retina */ 
 @media only screen and (min-width : 320px) {
-    
+    .my-container-padding{
+     padding: 1em 2em;
+}
 }
 
 /* Extra Small Devices, Phones equivalent to class xs */ 
 @media only screen and (min-width : 480px) {
    .my-container-width{
-    width:60%;
+    width:65%;
     }
 }
 
 /* Small Devices, Tablets equivalent to class sm */
-@media only screen and (min-width : 768px) {
+@media only screen and (min-width : 830px) {
    .my-container-width{
     width:45%;
     }
+    .my-container-padding{
+     padding: 2em 3em;
+}
 }
 
 /* Medium Devices, Desktops equivalent to class md */
 @media only screen and (min-width : 992px) {
    .my-container-width{
-    width:30%;
+    width:33%;
     }
+    .my-container-padding{
+     padding: 2.5em 4em;
+}
 }
 
 /* Large Devices, Wide Screens equivalent to class lg */
