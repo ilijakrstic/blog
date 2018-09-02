@@ -34,12 +34,35 @@ public class RegistrationController {
     
 @RequestMapping(value="/registration",method = RequestMethod.POST)
     public String saveUser(@ModelAttribute("user") @Valid User user,BindingResult result,Model model){
+        
+        //ukoliko forma nije validna vraca registraciju sa ispisanim greskama
         if(result.hasErrors()){
              model.addAttribute("countries",countryDAO.getAll());
             return "registration";
         }
-        userDAO.saveUser(user);
         
-        return "success";
+        
+        //ukoliko su svi inputi validni proverava se da li korisnik sa unetim emailom i usernameom vec postji ukoliko postoji vraca
+        //registration view sa error porukom
+        
+        if((userDAO.userNameisValid(user.getUserName())) && (userDAO.emailIsValid(user.getEmail()))){
+          
+            userDAO.saveUser(user);
+          
+            return "success";
+           
+          
+        }else{
+            if(! (userDAO.userNameisValid(user.getUserName()))){
+                 model.addAttribute("userNameExists","Korisnik sa unetim korisnickim imenom vec postoji");
+            }
+            if(! (userDAO.emailIsValid(user.getEmail()))){
+                 model.addAttribute("emailExists","Korisnik sa unetom email adresom vec postoji");
+            }
+            
+            return "registration";
+        }
+    
+  
     }
 }
