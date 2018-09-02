@@ -17,11 +17,26 @@ public class IndexController {
     TopicDAO topicDAO;
     
     @RequestMapping(value={"/","/index"}, method=RequestMethod.GET)
-    public String getIndex(@RequestParam(value = "page", defaultValue = "1")int Page,ModelMap modelMap){
+    public String getIndex(@RequestParam(value = "page", defaultValue = "1")int page,ModelMap modelMap){
         
-        List blogTopicList = topicDAO.getBlogTopic();
+        List blogTopicList = topicDAO.getBlogTopic(page);
+        
+        int endpage = (int) Math.ceil((double)topicDAO.ukupnoPodataka / 5);
+     
+        endpage = (page + 2) > endpage? endpage : page + 2;
+        
+        int startpage = 0;
+        
+        if ((page) - 2 > 0)
+            startpage =- 2;
+        else
+            startpage = 1; endpage+=2;
         
         modelMap.addAttribute("blogTopicList", blogTopicList);
+        modelMap.addAttribute("startpage", startpage);
+        modelMap.addAttribute("endpage", endpage);
+        modelMap.addAttribute("kurPage", page);
+        modelMap.addAttribute("topicList", blogTopicList);
         
         Topic top = (Topic)blogTopicList.get(0);
         System.out.println(top.toString());

@@ -35,22 +35,26 @@
             </nav>
         </div>
 
-        <div class="container" id="content-div" style="padding-top:5%">
-            <div class="row" style="text-decoration: none">
-                <a href="#" >
-                    <div class="col-lg-4 col-md-6 col-sm-12 d-flex justify-content-center" style="padding-bottom: 20px">
-                        <div class="card text-center" style="width: 16rem;">
-                            <img class="card-img-top img-fluid" src="https://cdn.pixabay.com/photo/2015/01/15/16/16/staircase-600468_960_720.jpg">
-                            <div class="card-body">
-                                <h5 class="card-title card-text">Card title</h5>
-                                <p class="card-text card-text text-justify">Probna verzija kartice u bootstrapu</p>
-                                <a href="#" style="margin-top:10px" class="btn btn-primary">Vise</a>
+        
+            <div class="container" id="content-div" style="padding-top:5%">
+                <div class="row" style="text-decoration: none">
+                    <c:forEach items="${topicList}" var="topic">
+                        <a href="topic/${topic.getName()}" >
+                            <div class="col-lg-4 col-md-6 col-sm-12 d-flex justify-content-center" style="padding-bottom: 20px">
+                                <div class="card text-center" style="width: 16rem;">
+                                    <img class="card-img-top img-fluid" src="<spring:url value="${topic.getTopicPhoto()}"/>">
+                                    <div class="card-body">
+                                        <h5 class="card-title card-text">${topic.getTitle()}</h5>
+                                        <p class="card-text card-text text-justify">${topic.getDescription()}</p>
+                                        <a href="#" style="margin-top:10px" class="btn btn-primary">Vise</a>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </a>
-            </div>	
-        </div>
+                        </a>
+                    </c:forEach>
+                </div>	
+            </div>
+        
 
 
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

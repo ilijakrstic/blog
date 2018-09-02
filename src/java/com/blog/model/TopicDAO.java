@@ -12,12 +12,21 @@ public class TopicDAO {
     @Autowired
     SessionFactory sessionFactory;
     
-    public List getBlogTopic(){
+    public static int ukupnoPodataka = 0;
+    
+    public List getBlogTopic(int startPage){
         
         Session session = sessionFactory.openSession();
-        
+        List list = null;
         Criteria cr = session.createCriteria(Topic.class).add(Restrictions.eq("category", "blog"));
-        List list = cr.list();
+        list = cr.list();
+        ukupnoPodataka = list.size();
+        
+        cr.setFirstResult((startPage-1)*5);
+        cr.setMaxResults(5);
+        list = cr.list();
+        
+         
         
         return list;
         
