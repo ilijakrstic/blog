@@ -22,8 +22,8 @@ public class TopicDAO {
         list = cr.list();
         ukupnoPodataka = list.size();
         
-        cr.setFirstResult((startPage-1)*5);
-        cr.setMaxResults(5);
+        cr.setFirstResult((startPage-1)*9);
+        cr.setMaxResults(9);
         list = cr.list();
         
          
