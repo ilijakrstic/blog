@@ -1,3 +1,7 @@
+body{
+    
+
+}
 
 #content-nav a{
     color:#7f8c8d;
@@ -9,7 +13,7 @@
 }
 #content-div img{ 
     object-fit: cover;
-    width:16rem;
+    width:13rem;
     height:11rem;
 }
 .card-text{
@@ -17,4 +21,12 @@
 }
 a:hover{
     text-decoration: none
+}
+
+.social-icon{
+    margin:0px 5px 0px 5px;
+}
+
+#social-card{
+    border: 1px solid #b2bec3;
 }
