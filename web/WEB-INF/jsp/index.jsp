@@ -36,24 +36,34 @@
         </div>
 
         
-            <div class="container" id="content-div" style="padding-top:5%">
-                <div class="row" style="text-decoration: none">
-                    <c:forEach items="${topicList}" var="topic">
-                        <a href="topic/${topic.getName()}" >
-                            <div class="col-lg-4 col-md-6 col-sm-12 d-flex justify-content-center" style="padding-bottom: 20px">
-                                <div class="card text-center" style="width: 16rem;">
-                                    <img class="card-img-top img-fluid" src="<spring:url value="${topic.getTopicPhoto()}"/>">
-                                    <div class="card-body">
-                                        <h5 class="card-title card-text">${topic.getTitle()}</h5>
-                                        <p class="card-text card-text text-justify">${topic.getDescription()}</p>
-                                        <a href="#" style="margin-top:10px" class="btn btn-primary">Vise</a>
-                                    </div>
+        <div class="container" id="content-div" style="padding-top:5%">
+            <div class="row" style="text-decoration: none">
+                <c:forEach items="${topicList}" var="topic">
+                    <a href="topic/${topic.getName()}" >
+                        <div class="col-lg-4 col-md-6 col-sm-12 d-flex justify-content-center" style="padding-bottom: 20px">
+                            <div class="card text-center" style="width: 16rem;">
+                                <img class="card-img-top img-fluid" src="<spring:url value="${topic.getTopicPhoto()}"/>">
+                                <div class="card-body">
+                                    <h5 class="card-title card-text">${topic.getTitle()} + ${topic.getId()}</h5>
+                                    <p class="card-text card-text text-justify">${topic.getDescription()}</p>
+                                    <a href="#" style="margin-top:10px" class="btn btn-primary">Vise</a>
                                 </div>
                             </div>
-                        </a>
+                        </div>
+                    </a>
+                </c:forEach>
+            </div>	
+        </div>
+        
+        <div class="container text-center">
+            <ul class="pagination">
+                <li class="page-item"><a class="page-link" href="index?page=${currentPage-1}">Previous</a></li>
+                    <c:forEach begin="${startpage}" end="${endpage}" var="p">
+                        <li class="page-item ${p == currentPage?"active":""}" ><a class="page-link" href="index?page=${p}">${p}</a></li>
                     </c:forEach>
-                </div>	
-            </div>
+                <li class="page-item"><a class="page-link" href="index?page=${currentPage+1}">Next</a></li>
+            </ul>
+        </div>
         
 
 

@@ -18,28 +18,38 @@ public class IndexController {
     
     @RequestMapping(value={"/","/index"}, method=RequestMethod.GET)
     public String getIndex(@RequestParam(value = "page", defaultValue = "1")int page,ModelMap modelMap){
-        
+        System.out.println(page);
         List blogTopicList = topicDAO.getBlogTopic(page);
         
-        int endpage = (int) Math.ceil((double)topicDAO.ukupnoPodataka / 5);
-     
-        endpage = (page + 2) > endpage? endpage : page + 2;
         
-        int startpage = 0;
         
-        if ((page) - 2 > 0)
-            startpage =- 2;
+        int totalPage = (int) Math.ceil((double)topicDAO.ukupnoPodataka / 9);
+        int endpage;
+        int startpage = page;
+        System.out.println(page);
+        System.out.println("start = "+ startpage);
+        
+        endpage = (page + 2) > totalPage? totalPage : page + 2;
+        
+        
+        
+        if ((page - 2) <= 0)
+            startpage = 1; 
         else
-            startpage = 1; endpage+=2;
+            startpage -= 2;
         
         modelMap.addAttribute("blogTopicList", blogTopicList);
         modelMap.addAttribute("startpage", startpage);
         modelMap.addAttribute("endpage", endpage);
-        modelMap.addAttribute("kurPage", page);
+        modelMap.addAttribute("currentPage", page);
         modelMap.addAttribute("topicList", blogTopicList);
         
-        Topic top = (Topic)blogTopicList.get(0);
-        System.out.println(top.toString());
+        System.out.println("totalData = " + topicDAO.ukupnoPodataka);
+        System.out.println("totalPage = "+ totalPage);
+        System.out.println("startPage = " + startpage);
+        System.out.println("endPage = " + endpage);
+        System.out.println("currentage = " + page);
+    
         return "index";
     }
     
