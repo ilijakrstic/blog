@@ -1,18 +1,21 @@
 body{
-    background-image: url('../img/thumb-1920-369573.jpg');
+    background-image: url('../img/MTMwOTgxMTI5NDk3OTA5NzI2.jpg');
     background-repeat: no-repeat;
     background-position: center;
 }
 
 .my-input{
-    border-color:#00BCD4;
+    border-color:#2ecc71;
     border-radius: 15px;
     background-color: transparent;
 }
 .my-container{
-    margin:auto;margin-top: 2em;margin-bottom: 2em;
-    background-color:rgb(255, 255, 255,0.89);
    
+    background-color:rgb(255, 255, 255,0.8);
+   
+}
+.my-container-margin{
+     margin:auto;margin-top: 3em;margin-bottom: 2em;
 }
 .my-container-padding{
      padding: 4em;
@@ -27,29 +30,46 @@ body{
     margin-bottom: 1em;
 }
 
+.radio-inline{
+    margin-left: 0.5em;
+     margin-right: 0.5em;
+    
+}
+#radioButt{
+    margin-left: 0.2em;display: inline;
+}
 @media only screen and (min-width : 200px) {
     .my-container-width{
     width:80%;
     }
     
-    .my-container-padding{
-     padding: 1em;
+.my-container-margin{
+     margin:auto;margin-top: 1em;margin-bottom: 1em;
 }
+
+ .my-container-padding{padding: 1em;}
+   
       
 }
 
 /* Custom, iPhone Retina */ 
 @media only screen and (min-width : 320px) {
     .my-container-padding{
-     padding: 1em 2em;
-}
+     padding: 1em;
+    }
+     my-container-margin{
+     margin-top: 1em;margin-bottom: 1em;
+    }
 }
 
 /* Extra Small Devices, Phones equivalent to class xs */ 
 @media only screen and (min-width : 480px) {
    .my-container-width{
-    width:65%;
+    width:55%;
     }
+    .my-container-margin{
+     margin:auto;margin-top: 2em;margin-bottom: 2em;
+}
 }
 
 /* Small Devices, Tablets equivalent to class sm */
@@ -59,6 +79,9 @@ body{
     }
     .my-container-padding{
      padding: 2em 3em;
+}
+.my-container-margin{
+     margin:auto;margin-top: 3em;margin-bottom: 2em;
 }
 }
 

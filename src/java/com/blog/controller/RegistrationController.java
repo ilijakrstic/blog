@@ -29,6 +29,7 @@ public class RegistrationController {
     public String getRegistration(Model model){
         model.addAttribute("user",new User());
         model.addAttribute("countries",countryDAO.getAll());
+        model.addAttribute("style","registration");
         return "registration";
     }
     
@@ -59,7 +60,7 @@ public class RegistrationController {
             if(! (userDAO.emailIsValid(user.getEmail()))){
                  model.addAttribute("emailExists","Korisnik sa unetom email adresom vec postoji");
             }
-            
+              model.addAttribute("countries",countryDAO.getAll());
             return "registration";
         }
     

@@ -38,6 +38,33 @@ public class UserDAO {
 
     }
     
+     public  boolean emailIsValid(String email) {
+
+         Session session = sessionFactory.getCurrentSession();
+
+       
+         User user = (User) session.getNamedQuery("User.findByEmail").setString("email", email).uniqueResult();
+         if(user == null){
+             return true;
+         }
+         
+        return false;
+
+    }
+      public  boolean userNameisValid(String userName) {
+
+         Session session = sessionFactory.getCurrentSession();
+
+       
+         User user = (User) session.getNamedQuery("User.findByUserName").setString("userName", userName).uniqueResult();
+         if(user == null){
+             return true;
+         }
+         
+        return false;
+
+    }
+    
     public void saveUser(User user){
         Session session = sessionFactory.getCurrentSession();
         session.save(user);

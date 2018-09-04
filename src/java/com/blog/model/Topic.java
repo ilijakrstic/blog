@@ -37,7 +37,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Topic.findByContent", query = "SELECT t FROM Topic t WHERE t.content = :content")
     , @NamedQuery(name = "Topic.findByDescription", query = "SELECT t FROM Topic t WHERE t.description = :description")
     , @NamedQuery(name = "Topic.findByAuthor", query = "SELECT t FROM Topic t WHERE t.author = :author")
-    , @NamedQuery(name = "Topic.findByDate", query = "SELECT t FROM Topic t WHERE t.date = :date")
+    , @NamedQuery(name = "Topic.findByDate", query = "SELECT t FROM Topic t WHERE t.publish_date = :date")
     , @NamedQuery(name = "Topic.findByCategory", query = "SELECT t FROM Topic t WHERE t.category = :category")
     , @NamedQuery(name = "Topic.findBySubCategory", query = "SELECT t FROM Topic t WHERE t.subCategory = :subCategory")
     , @NamedQuery(name = "Topic.findByTopicPhoto", query = "SELECT t FROM Topic t WHERE t.topicPhoto = :topicPhoto")})
@@ -76,9 +76,9 @@ public class Topic implements Serializable {
     private String author;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "date")
-    @Temporal(TemporalType.DATE)
-    private Date date;
+    @Column(name = "publish_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date publish_date;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
@@ -108,7 +108,7 @@ public class Topic implements Serializable {
         this.content = content;
         this.description = description;
         this.author = author;
-        this.date = date;
+        this.publish_date = date;
         this.category = category;
         this.topicPhoto = topicPhoto;
     }
@@ -161,13 +161,15 @@ public class Topic implements Serializable {
         this.author = author;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getPublish_date() {
+        return publish_date;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setPublish_date(Date publish_date) {
+        this.publish_date = publish_date;
     }
+
+ 
 
     public String getCategory() {
         return category;

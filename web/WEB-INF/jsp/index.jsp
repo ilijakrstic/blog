@@ -39,7 +39,7 @@
         <div class="container" id="content-div" style="padding-top:5%">
             <div class="row" style="text-decoration: none">
                 <c:forEach items="${topicList}" var="topic">
-                    <a href="topic/${topic.getName()}" >
+                    <a href="topic/${topic.getCategory()}/${topic.getSubCategory()}/${topic.getId()}" >
                         <div class="col-lg-4 col-md-6 col-sm-12 d-flex justify-content-center" style="padding-bottom: 20px">
                             <div class="card text-center" style="width: 16rem;">
                                 <img class="card-img-top img-fluid" src="<spring:url value="${topic.getTopicPhoto()}"/>">

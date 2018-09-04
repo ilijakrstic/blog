@@ -67,6 +67,7 @@ public class User implements Serializable {
     @Pattern(regexp = "[^\\ ]{5,256}",message = "lozinka mora da sadrzi minimum 5 karaktera")
     @Column(name = "password")
     private String password;
+
     @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="email nije validan")//if the field contains email address consider using this annotation to enforce field validation
     @Column(name = "email")
     private String email;

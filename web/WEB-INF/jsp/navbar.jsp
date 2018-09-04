@@ -18,5 +18,8 @@
         <span class="navbar-text">
             <a href="/blog/login" style="margin:-10px" class="nav-link">Prijavi se</a>
         </span>
+        <span class="navbar-text">
+            <button onclick="location.href='registration'" type="button" class="btn btn-outline-success">Registruj se</button>
+        </span>
     </div>
 </nav>
