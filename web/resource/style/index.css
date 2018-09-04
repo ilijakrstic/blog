@@ -11,10 +11,11 @@ body{
 #content-nav .active{
     color:#e74c3c;
 }
+
+
 #content-div img{ 
     object-fit: cover;
-    width:13rem;
-    height:11rem;
+    height:14rem;
 }
 .card-text{
     color:black;

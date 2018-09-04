@@ -29,21 +29,25 @@
                 <a class="nav-item nav-link disabled" href="#">IT</a>
             </nav>
         </div>
+        
+        <div class="container">
+            <button>ss</button>
+            <button>ss</button>
+        </div>
 
 
         <div class="container-fluid">
             <div class="row" style="margin-top:2%">
-                <div class="container col " id="content-div" style="margin:0px">
+                <div class="container d-flex justify-content-center text-center col " id="content-div" style="margin:0px">
                     <div class="row" style="text-decoration: none">
                         <c:forEach items="${topicList}" var="topic">
                             <a href="topic/${topic.getName()}" >
-                                <div class="col-lg-4 col-md-6 col-sm-12 d-flex  justify-content-center" style="padding-bottom: 20px">
-                                    <div class="card text-center" style="width: 13rem;">
+                                <div class="col-lg-12 col-md-6 col-sm-12 d-flex  justify-content-center" style="padding-bottom: 20px">
+                                    <div class="card text-center text-justify" style="width: 19rem; height: 25rem">
                                         <img class="card-img-top img-fluid" src="<spring:url value="${topic.getTopicPhoto()}"/>">
                                         <div class="card-body">
                                             <h5 class="card-title card-text">${topic.getTitle()} + ${topic.getId()}</h5>
                                             <p class="card-text card-text text-justify">${topic.getDescription()}</p>
-                                            <a href="#" style="margin-top:10px" class="btn btn-primary">Vise</a>
                                         </div>
                                     </div>
                                 </div>
@@ -51,7 +55,7 @@
                         </c:forEach>
                     </div>	
                 </div>
-                <div class="container col col-lg-4"
+                <div class="container col col-lg-3"
                      <div  class="card">
                         <div id="social-card" class="card-body">
                             <div class="container text-center">
@@ -59,8 +63,9 @@
                                 <img class="social-icon" src="<spring:url value="/resource/img/facebook.png"/>"/>
                                 <img class="social-icon" src="<spring:url value="/resource/img/instagram.png"/>"/>
                                 <img class="social-icon" src="<spring:url value="/resource/img/youtube.png"/>"/> 
-                                
-                                <h5>Upoznajte autore</h5>
+                                <br>
+                                <hr>
+                                <h6>SPONSORED ADS</h6>
                             </div>
                         </div>
                     </div>

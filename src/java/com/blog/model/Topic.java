@@ -76,7 +76,7 @@ public class Topic implements Serializable {
     private String author;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "date")
+    @Column(name = "publish_date")
     @Temporal(TemporalType.DATE)
     private Date date;
     @Basic(optional = false)
