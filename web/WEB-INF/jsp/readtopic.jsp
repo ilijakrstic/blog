@@ -23,12 +23,12 @@
             <h3 id="releated-header" class="mb-3" style="text-align: center">Povezani clanci</h3>
             <div class="card">
                 <h3 class="card-title pb-2 pt-3" style="text-align: center">${topic.getName()}</h3>
-                <h5 class="card-subtitle pb-1 " style="text-align: center">(${topic.getDescription()})</h5>
+                
 
                 <div class="card-body">
                     <img  src="..${topic.getTopicPhoto()}" alt="povezani clanak slika" class="img-fluid mb-3">
-                    <p>${topic.getContent()}</p>
-                    <button class="btn btn-danger float-right">Saznaj vise</button>
+                    <p>Ovde ce da ide samo jedan kratak deo iz texta pa onda 3 tackice..To cu da sredim ;)</p>
+                    <button class="btn btn-danger">Saznaj vise</button>
                 </div>
             </div>
         </div>

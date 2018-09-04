@@ -16,7 +16,7 @@ public class TopicController {
     TopicDAO topicDAO;
     
     @RequestMapping(value="/topic/{category}/{subcategory}/{id}")
-    public String readTopic(@PathVariable String category, @PathVariable String subcategory ,@PathVariable String id,Model model){
+    public String readTopic(@PathVariable String id,Model model){
     
         
         Topic topic = topicDAO.getTopicById( id);
