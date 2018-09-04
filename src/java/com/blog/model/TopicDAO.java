@@ -19,8 +19,7 @@ public class TopicDAO {
         
         Session session = sessionFactory.openSession();
         List list = null;
-        Criteria cr = session.createCriteria(Topic.class).add(Restrictions.eq("category", "blog"));
-        cr.addOrder(Order.desc("publish_date"));
+        Criteria cr = session.createCriteria(Topic.class).add(Restrictions.eq("category", "blog")).addOrder(Order.desc("publish_date"));
         list = cr.list();
         ukupnoPodataka = list.size();
         

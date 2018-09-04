@@ -1,3 +1,7 @@
+body{
+    
+
+}
 
 #content-nav a{
     color:#7f8c8d;
@@ -7,14 +11,23 @@
 #content-nav .active{
     color:#e74c3c;
 }
+
+
 #content-div img{ 
     object-fit: cover;
-    width:16rem;
-    height:11rem;
+    height:14rem;
 }
 .card-text{
     color:black;
 }
 a:hover{
     text-decoration: none
+}
+
+.social-icon{
+    margin:0px 5px 0px 5px;
+}
+
+#social-card{
+    border: 1px solid #b2bec3;
 }
