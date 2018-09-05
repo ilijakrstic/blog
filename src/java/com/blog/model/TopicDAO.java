@@ -2,6 +2,7 @@ package com.blog.model;
 
 import java.util.List;
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
@@ -56,12 +57,23 @@ public class TopicDAO {
     
     public List getTopicBySubCategory(String subCategory){
         
-        Session session = sessionFactory.getCurrentSession();
+        Session session = sessionFactory.openSession();
         
         List list = session.getNamedQuery("Topic.findByCategory").setString("subCategory", subCategory).list();
         
         return list;
         
+    }
+    
+    
+    //metoda za povezane clanke
+    
+    public List<Topic> getReleatedTopics(String subCategory,String id){
+        Session session = sessionFactory.openSession();
+        
+        List<Topic> topics = (List<Topic>) session.getNamedQuery("Topic.findBySubCategory").setString("topicId", id).setString("subCategory", subCategory).setMaxResults(3).list();
+        
+        return topics;
     }
     
     

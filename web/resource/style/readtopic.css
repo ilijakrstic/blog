@@ -3,7 +3,18 @@
 }
 
 .card-body {
-    padding-left :2.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top:1rem;
+    background-color: #ecf0f1;
+}
+.card-body p{
+    font-size: 14px;
+}
 
-    padding-right :2.5rem;
+.card-title{
+   background-color: #31945E;
+   color: white;
+   padding-bottom: .6em;
+   margin-bottom: 0;
 }

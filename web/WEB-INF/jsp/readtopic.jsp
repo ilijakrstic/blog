@@ -15,23 +15,24 @@
                 <h2 class="mb-3">${topic.getTitle()}</h2>
                 <p >${topic.getContent()}</p>
             </div>
+
+        </div>
             
-        </div>
-
-        <!-- Povezani clanci -->
-        <div class="col-md-3  align-items-center" style="padding-top:3em">
-            <h3 id="releated-header" class="mb-3" style="text-align: center">Povezani clanci</h3>
-            <div class="card">
-                <h3 class="card-title pt-3" style="text-align: center">${topic.getName()}</h3>
-                
-
-                <div class="card-body">
-                    <img  src="..${topic.getTopicPhoto()}" alt="povezani clanak slika" class="img-fluid mb-3">
-                    <p>${topic.getDescription()}</p>
-                    <button class="btn btn-outline-success">Saznaj vise</button>
+                <!-- Povezani clanci -->
+            <div class="col-md-3  align-items-center" style="padding-top:3em">
+                 <h3 id="releated-header" class="mb-3" style="text-align: center">Povezani clanci</h3>
+                <c:forEach items="${releatedTopics}" var="rel">
+                <div class="card mb-5">
+                    <h3 class="card-title pt-3 " style="text-align: center">${rel.getName()}</h3>
+                    <div class="card-body">
+                        <img  src="..${rel.getTopicPhoto()}" alt="povezani clanak slika" class="img-fluid mb-3">
+                        <p>${rel.getDescription()}</p>
+                        <button class="btn btn-outline-success">Saznaj vise</button>
+                    </div>
                 </div>
-            </div>
-        </div>
+       
+        </c:forEach>
+     </div>
     </div>
 </div>
 

@@ -16,12 +16,13 @@ public class TopicController {
     TopicDAO topicDAO;
     
     @RequestMapping(value="/topic/{category}/{subcategory}/{id}")
-    public String readTopic(@PathVariable String id,Model model){
+    public String readTopic(@PathVariable String id,@PathVariable String subcategory ,Model model){
     
         
         Topic topic = topicDAO.getTopicById( id);
-        
+        List<Topic> releatedTopics = topicDAO.getReleatedTopics(subcategory,id);
         model.addAttribute("topic",topic);
+        model.addAttribute("releatedTopics",releatedTopics);
         model.addAttribute("style","readtopic");
         
         return "readtopic";
