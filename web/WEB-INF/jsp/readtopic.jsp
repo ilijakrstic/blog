@@ -19,16 +19,16 @@
         </div>
 
         <!-- Povezani clanci -->
-        <div class="col-md-2 align-items-center" style="padding-top:3em">
+        <div class="col-md-3  align-items-center" style="padding-top:3em">
             <h3 id="releated-header" class="mb-3" style="text-align: center">Povezani clanci</h3>
             <div class="card">
-                <h3 class="card-title pb-2 pt-3" style="text-align: center">${topic.getName()}</h3>
+                <h3 class="card-title pt-3" style="text-align: center">${topic.getName()}</h3>
                 
 
                 <div class="card-body">
                     <img  src="..${topic.getTopicPhoto()}" alt="povezani clanak slika" class="img-fluid mb-3">
-                    <p>Ovde ce da ide samo jedan kratak deo iz texta pa onda 3 tackice..To cu da sredim ;)</p>
-                    <button class="btn btn-danger">Saznaj vise</button>
+                    <p>${topic.getDescription()}</p>
+                    <button class="btn btn-outline-success">Saznaj vise</button>
                 </div>
             </div>
         </div>
