@@ -8,7 +8,10 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional(propagation = Propagation.REQUIRED,readOnly = false)
 public class TopicDAO {
     
     @Autowired
@@ -18,7 +21,7 @@ public class TopicDAO {
     
     public List getBlogTopic(int startPage){
         
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         List list = null;
         Criteria cr = session.createCriteria(Topic.class).add(Restrictions.eq("category", "blog")).addOrder(Order.desc("publish_date"));
         list = cr.list();
@@ -37,7 +40,7 @@ public class TopicDAO {
     
     public Topic getTopicById(String id){
         
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         
         Topic topic =  (Topic) session.getNamedQuery("Topic.findById").setString("id", id).uniqueResult();
         
@@ -57,7 +60,7 @@ public class TopicDAO {
     
     public List getTopicBySubCategory(String subCategory){
         
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         
         List list = session.getNamedQuery("Topic.findByCategory").setString("subCategory", subCategory).list();
         
@@ -69,9 +72,9 @@ public class TopicDAO {
     //metoda za povezane clanke
     
     public List<Topic> getReleatedTopics(String subCategory,String id){
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         
-        List<Topic> topics = (List<Topic>) session.getNamedQuery("Topic.findBySubCategory").setString("topicId", id).setString("subCategory", subCategory).setMaxResults(3).list();
+        List<Topic> topics = (List<Topic>) session.getNamedQuery("Topic.findBySubCategory").setString("topicId", id).setString("subCategory", subCategory).setMaxResults(2).list();
         
         return topics;
     }

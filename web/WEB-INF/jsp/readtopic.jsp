@@ -8,18 +8,20 @@
 
     <div class="row justify-content-around">
         <!-- topic deo -->
-        <div class="col-md-9" >
-            <h1 style="text-align: center" class="mb-5">${topic.getName()}</h1>
-            <img src="..${topic.getTopicPhoto()}" class="img-fluid"/>
-            <div class="container pt-5 topic-content">
-                <h2 class="mb-3">${topic.getTitle()}</h2>
-                <p >${topic.getContent()}</p>
-            </div>
+        <div class="col-md-9 topic">
+          
+                <h1 style="text-align: center" class="mb-5">${topic.getName()}</h1>
 
+                <img src="..${topic.getTopicPhoto()}" class="img-fluid mx-auto d-block" />
+                <div class="container pt-5 topic-content">
+                    <h2 class="mb-3">${topic.getTitle()}</h2>
+                    <p >${topic.getContent()}</p>
+                </div>
+     
         </div>
             
                 <!-- Povezani clanci -->
-            <div class="col-md-3  align-items-center" style="padding-top:3em">
+            <div class="col-md-2  align-items-center" style="padding-top:3em">
                  <h3 id="releated-header" class="mb-3" style="text-align: center">Povezani clanci</h3>
                 <c:forEach items="${releatedTopics}" var="rel">
                 <div class="card mb-5">
