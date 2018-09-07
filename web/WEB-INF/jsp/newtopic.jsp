@@ -19,7 +19,7 @@
 
         <div class="container-fluid ">
 
-            <form action="/blog/topic/newtopic" method="POST">
+            <form action="/blog/topic/newtopic" method="POST" enctype="multipart/form-data">
 
                 <div class="row">
 
@@ -65,12 +65,7 @@
                             <small id="description-help" style="display: inline" class="form-text text-muted">100</small>
                         </div>
                            
-                        <div class="form-group col-lg-12">
-                            <label for="image-input">Slike</label>
-                            <input type="file" multiple="multiple" style="padding-left:3%" class="form-control" id="image-input">
-                            <small id="image-help" class="form-text text-muted">Izaberite sliku</small>
-                            <input type="button" id="image-upload-button" style="margin-top:3%" class="btn btn-success" value="Sacuvaj">
-                        </div>                       
+                        <input type="file" name="fileUpload" size="50" multiple/>                         
                    </div>
             </div>
                 
