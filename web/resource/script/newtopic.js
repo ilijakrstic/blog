@@ -26,20 +26,21 @@ $(document).ready(function () {
         for (var i = 0; i < files.length; i++) {
             fileUpload.append("fileUpload", files[i]);
         }
-      
-     
-      $.ajax({
-          url:'/blog/topic/upload',
-          type: 'POST',
-          data: fileUpload,
-           cache: false,
-           dataType:"multipart/form-data",
-           processData: false,
-           contentType: false,
-           success:function(data){
-               console.log(data + "succes");
+
+        $.ajax({
+            url:'/blog/topic/upload',
+            type: 'POST',
+            data: fileUpload,
+            cache: false,
+            dataType:"multipart/form-data",
+            processData: false,
+            contentType: false,
+            success : function(response) {
+                
+            },
+            error : function(xhr, status, error) {
                
-           }
+            }
           
             
         });

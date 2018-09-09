@@ -75,23 +75,11 @@ public class TopicController {
         String saveDir = "C:\\Users\\Stefan\\Documents\\GitHub\\blog\\web\\resource\\img\\topic_resources";
 
         fileUploadHandler(fileUpload, saveDir, "test");
-        
-        
-        
-        
-        
+  
         return "testtt";
         
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     
     //upload fajla na server
     private void fileUploadHandler(CommonsMultipartFile[] fileUpload, String saveDirectory, String topicTitle) throws IOException {
@@ -121,6 +109,8 @@ public class TopicController {
                         sb.append("_");
                         sb.append(aFile.getOriginalFilename());
 
+                        System.out.println(sb.substring(5, 7));
+                        
                         aFile.transferTo(new File( sb.toString()));
                     } catch (IllegalStateException | IOException e) {
                     }
