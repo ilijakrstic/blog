@@ -61,12 +61,12 @@ public class TopicController {
         //ovde upises putanju do svog projekta tj. na svom kompu
         String saveDir = "C:\\Users\\nrack\\OneDrive\\Documents\\GitHub\\blog\\web\\resource\\img\\topic_resources\\";
         
-        fileUploadHandler(fileUpload, saveDir, title);
+        fileUploadHandler(fileUpload, saveDir);
 
         return "newtopic";
     }
 
-    private void fileUploadHandler(CommonsMultipartFile[] fileUpload, String saveDirectory, String topicTitle) throws IOException {
+    private void fileUploadHandler(CommonsMultipartFile[] fileUpload, String saveDirectory) throws IOException {
 
         if (fileUpload != null && fileUpload.length > 0) {
             for (CommonsMultipartFile aFile : fileUpload) {
@@ -82,8 +82,7 @@ public class TopicController {
                         StringBuilder sb = new StringBuilder();
                         
                         sb.append(saveDirectory);
-                        sb.append("\\");
-                        sb.append(topicTitle);
+                        
                         File dir = new File(sb.toString());
                         if (!dir.exists()) {
                             dir.mkdirs();

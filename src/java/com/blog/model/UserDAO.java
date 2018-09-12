@@ -70,4 +70,12 @@ public class UserDAO {
         session.save(user);
     }
 
+    
+    public User getUserByUserNme(String username){
+        
+        Session session = sessionFactory.getCurrentSession();
+        
+        return  (User) session.getNamedQuery("User.findByUserName").setString("userName",username).uniqueResult();
+          
+    }
 }

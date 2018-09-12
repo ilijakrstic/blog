@@ -1,0 +1,74 @@
+.profilna:hover{
+    background-color:#343A40;
+    color:white;
+    
+}
+#ime::after{
+	content: 'Novi Sad SRB';
+	font-size: 12px;
+	margin-left: 1em;
+}
+
+.zanimanje{
+	color:#2ecc71;
+}
+
+
+.checked {
+    color: #2ecc71;
+}
+
+
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    color: #7f8c8d;
+    background-color: transparent;
+    border-color: transparent;
+    border-bottom: 2px solid #2ecc71;
+    padding-top: .2em;
+    padding-bottom: .2em;
+}
+
+.nav-tabs .nav-link {
+ color:  #2ecc71;
+       padding-top: .2em;
+    padding-bottom: .2em;
+}
+
+
+#zanimanja{
+	list-style: none;padding-left: 0;
+}
+
+#myTabContent a{
+	color:  #2ecc71;
+}
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+
+}
+.fa-camera-retro {
+    font-size: 24px;
+}
+
+@media(min-width: 1000px){
+	.info-margin{
+		margin-left: 3em;
+	}
+}
