@@ -72,7 +72,7 @@ public class TopicController {
     public String uploadImage(@RequestParam CommonsMultipartFile[] fileUpload) throws IOException{
         
         //ovde upises putanju do svog projekta tj. na svom kompu
-        String saveDir = "C:\\Users\\nrack\\OneDrive\\Documents\\GitHub\\blog\\web\\resource\\img\\topic_resources";
+        String saveDir = "C:\\Users\\Ilija\\Documents\\NetBeansProjects\\blog\\web\\resource\\img\\topic_resources\\";
 
         fileUploadHandler(fileUpload, saveDir, "test");
   

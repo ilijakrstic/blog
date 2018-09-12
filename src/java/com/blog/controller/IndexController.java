@@ -16,10 +16,17 @@ public class IndexController {
     @Autowired
     TopicDAO topicDAO;
     
+    List blogTopicList = null;
+    
     @RequestMapping(value={"/","/index"}, method=RequestMethod.GET)
-    public String getIndex(@RequestParam(value = "page", defaultValue = "1")int page,ModelMap modelMap){
+    public String getIndex(@RequestParam(value = "page", defaultValue = "1")int page,@RequestParam(value="subcategory", required=false) String subcategory ,ModelMap modelMap){
         
-        List blogTopicList = topicDAO.getBlogTopic(page);
+        if(subcategory == null){
+             blogTopicList = topicDAO.getBlogTopic(page);
+        }else{
+            System.out.println(subcategory);
+             blogTopicList = topicDAO.getTopicBySubCategory(subcategory);
+        }
         
         
         

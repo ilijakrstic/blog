@@ -62,7 +62,7 @@ public class TopicDAO {
         
         Session session = sessionFactory.getCurrentSession();
         
-        List list = session.getNamedQuery("Topic.findByCategory").setString("subCategory", subCategory).list();
+        List list = session.getNamedQuery("Topic.findBySubCategory").setString("subCategory", subCategory).list();
         
         return list;
         

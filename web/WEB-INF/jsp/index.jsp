@@ -30,9 +30,16 @@
             </nav>
         </div>
         
-        <div class="container">
-            <button>ss</button>
-            <button>ss</button>
+        <div class="container text-center" style="margin-top:2%">
+            <a href="/blog/index?subcategory=zivot" class="btn btn btn-outline-success subcategory btn-sm" role="button" >Zivot</a>
+            <a href="/blog/index?subcategory=ljubav" class="btn btn btn-outline-success subcategory btn-sm" role="button" >Ljubav</a>
+            <a href="/blog/index?subcategory=muzika" class="btn btn btn-outline-success subcategory btn-sm" role="button" >Muzika</a>
+            <a href="/blog/index?subcategory=umetnost" class="btn btn btn-outline-success subcategory btn-sm" role="button" >Umetnost</a>
+            <a href="/blog/index?subcategory=filmovi" class="btn btn btn-outline-success subcategory btn-sm" role="button" >Filmovi</a>
+            <a href="/blog/index?subcategory=poznati" class="btn btn btn-outline-success subcategory btn-sm" role="button" >Poznati</a>
+            <a href="/blog/index?subcategory=zanimljivosti" class="btn btn btn-outline-success subcategory btn-sm" role="button" >Zanimljivosti</a>
+            <a href="/blog/index?subcategory=mladi" class="btn btn btn-outline-success subcategory btn-sm" role="button" >Mladi</a>
+            
         </div>
 
 
