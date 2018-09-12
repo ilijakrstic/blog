@@ -5,6 +5,7 @@
 
 <html lang="en">
     <head>
+        <base href="<spring:url value="/resource/"/>"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -64,16 +65,17 @@
                             <textarea name="description"  maxlength="100" id="description-input" placeholder="Unesite kratak opis teme" class="form-control"></textarea>
                             <small id="description-help" style="display: inline" class="form-text text-muted">100</small>
                         </div>
-                           
+                        
                        
                              <input type="file" name="fileUpload" id="file-input" size="50" multiple/> 
                              <button id="file-upload-button" class="btn btn-success">Sacuvaj Slike</button>
-                       
+                             <div class="container" id="imageListDiv"></div>
                    </div>
             </div>
                 
                 <input type="hidden" name="author"  value="Ilija Krstic">
                 <input type="submit" class="btn btn-success">
+
             </form>
         </div>
 
