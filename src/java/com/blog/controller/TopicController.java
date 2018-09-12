@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
@@ -56,17 +58,31 @@ public class TopicController {
             @RequestParam(value = "subcategory") String subCategory,
             @RequestParam(value = "description") String description,
             @RequestParam(value = "content") String content,
-            @RequestParam(value = "author") String author, @RequestParam CommonsMultipartFile[] fileUpload) throws IOException {
+            @RequestParam(value = "author") String author) throws IOException {
 
-        //ovde upises putanju do svog projekta tj. na svom kompu
-        String saveDir = "C:\\Users\\nrack\\OneDrive\\Documents\\GitHub\\blog\\web\\resource\\img\\topic_resources\\";
         
-        fileUploadHandler(fileUpload, saveDir);
 
         return "newtopic";
     }
+    
+    
+    
+    @RequestMapping(value="/topic/upload", method=RequestMethod.POST)
+    @ResponseBody
+    public String uploadImage(@RequestParam CommonsMultipartFile[] fileUpload) throws IOException{
+        
+        //ovde upises putanju do svog projekta tj. na svom kompu
+        String saveDir = "C:\\Users\\nrack\\OneDrive\\Documents\\GitHub\\blog\\web\\resource\\img\\topic_resources";
 
-    private void fileUploadHandler(CommonsMultipartFile[] fileUpload, String saveDirectory) throws IOException {
+        fileUploadHandler(fileUpload, saveDir, "test");
+  
+        return "testtt";
+        
+    }
+
+    
+    //upload fajla na server
+    private void fileUploadHandler(CommonsMultipartFile[] fileUpload, String saveDirectory, String topicTitle) throws IOException {
 
         if (fileUpload != null && fileUpload.length > 0) {
             for (CommonsMultipartFile aFile : fileUpload) {
@@ -92,6 +108,8 @@ public class TopicController {
                         sb.append("_");
                         sb.append(aFile.getOriginalFilename());
 
+                        System.out.println(sb.substring(5, 7));
+                        
                         aFile.transferTo(new File( sb.toString()));
                     } catch (IllegalStateException | IOException e) {
                     }

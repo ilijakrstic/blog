@@ -19,7 +19,7 @@
 
         <div class="container-fluid ">
 
-            <form action="/blog/topic/newtopic" method="POST" enctype="multipart/form-data">
+            <form action="/blog/topic/upload" method="POST"  enctype="multipart/form-data">
 
                 <div class="row">
 
@@ -65,12 +65,15 @@
                             <small id="description-help" style="display: inline" class="form-text text-muted">100</small>
                         </div>
                            
-                        <input type="file" name="fileUpload" size="50" multiple/>                         
+                       
+                             <input type="file" name="fileUpload" id="file-input" size="50" multiple/> 
+                             <button id="file-upload-button" class="btn btn-success">Sacuvaj Slike</button>
+                       
                    </div>
             </div>
                 
                 <input type="hidden" name="author"  value="Ilija Krstic">
-                <input type="submit">
+                <input type="submit" class="btn btn-success">
             </form>
         </div>
 
@@ -78,9 +81,9 @@
 
 
 
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        
         <script type="text/javascript" src="<spring:url value="/resource/script/newtopic.js"/>"></script>
     </body>
 </html>
