@@ -8,6 +8,7 @@
 <head>
     <base href="<spring:url value="/resource/"/>"/> <!-- Stavio sam base na resources pa da posle nekucam  celu putanju za svaki el pa mozda u nb pravi problem pa vidi ak nece-->
 	<meta charset="utf-8">
+        
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Starter Template Bootstrap</title>

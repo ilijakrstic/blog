@@ -1,28 +1,28 @@
 package com.blog.model;
 
 import java.io.Serializable;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
+
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import org.hibernate.validator.constraints.NotEmpty;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -88,6 +88,9 @@ public class User implements Serializable {
     @Column(name="country")
     @Size(min=2,max = 250,message = "ovo polje je obavezno")
     private String country;
+    
+    @OneToMany(mappedBy = "user")
+    private List<Comments> comments;
     
     public User() {
     }
@@ -197,6 +200,16 @@ public class User implements Serializable {
         this.gender = gender;
     }
 
+    public List<Comments> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comments> comments) {
+        this.comments = comments;
+    }
+
+    
+    
     
 
     @Override
