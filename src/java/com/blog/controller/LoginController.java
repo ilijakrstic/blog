@@ -22,21 +22,8 @@ public class LoginController {
         return "login";
     }
     
-     @RequestMapping(value="/login", method=RequestMethod.POST)
-    public String postIndex(@RequestParam("userEmail")String email,@RequestParam("userPassword")String password, ModelMap model){
-  
-        User user = userDAO.getUserByEmail(email);
-        System.out.println("user" + user);
-        if (user == null) {
-            model.addAttribute("emailError", "Pogresan e-mail");
-            return "login";
-        }else if(user.getPassword().equals(password)){
-            return "index";
-        }else{
-            model.addAttribute("passwordError", "Pogresna sifra");
-            return "login";
-        }
-
-    }
+     
+    
+    
     
 }

@@ -22,7 +22,7 @@ public class TopicDAO {
     public List getBlogTopic(int startPage){
         
         Session session = sessionFactory.getCurrentSession();
-        List list = null;
+        List list;
         Criteria cr = session.createCriteria(Topic.class).add(Restrictions.eq("category", "blog")).addOrder(Order.desc("publish_date"));
         list = cr.list();
         ukupnoPodataka = list.size();
@@ -32,7 +32,7 @@ public class TopicDAO {
        
         list = cr.list();
         
-         
+         System.out.println(list.size() + "velicina");
         
         return list;
         
@@ -58,11 +58,20 @@ public class TopicDAO {
         
     }
     
-    public List getTopicBySubCategory(String subCategory){
+    public List getTopicBySubCategory(String subCategory, int startPage){
         
         Session session = sessionFactory.getCurrentSession();
+        System.out.println(startPage + " " + subCategory);
         
-        List list = session.getNamedQuery("Topic.findBySubCategory").setString("subCategory", subCategory).list();
+        List list;
+        Criteria cr = session.createCriteria(Topic.class).add(Restrictions.eq("subCategory", subCategory));
+        list = cr.list();
+        ukupnoPodataka = list.size();
+        
+        cr.setFirstResult((startPage-1)*9);
+        cr.setMaxResults(9);
+       
+        list = cr.list();
         
         return list;
         

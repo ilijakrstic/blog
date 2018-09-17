@@ -21,6 +21,8 @@
             <img src="<spring:url value="/resource/img/BudiNajboljaVerzijaSebe.jpg"/>" style="width: 100%" alt="asds">
         </div>
         
+       
+        
         <div class="container" id="content-nav">
             <nav class="nav nav-justified">
                 <a class="nav-item nav-link active" href="#">BLOG</a>
@@ -42,6 +44,8 @@
             
         </div>
 
+                            
+
 
         <div class="container-fluid">
             <div class="row" style="margin-top:2%">
@@ -55,10 +59,11 @@
                                         <div class="card-body">
                                             <h5 class="card-title card-text">${topic.getTitle()} + ${topic.getId()}</h5>
                                             <p class="card-text card-text text-justify">${topic.getDescription()}</p>
+                                            <span><button type="button" class="like" data-topic="${topic.getId()}">LIKE</button></span>
                                         </div>
                                     </div>
                                 </div>
-                            </a>
+                            </a>                                     
                         </c:forEach>
                     </div>	
                 </div>
