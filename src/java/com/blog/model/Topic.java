@@ -1,5 +1,6 @@
 package com.blog.model;
 
+import com.blog.model.comment.Comments;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -37,7 +38,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Topic.findByAuthor", query = "SELECT t FROM Topic t WHERE t.author = :author")
     , @NamedQuery(name = "Topic.findByDate", query = "SELECT t FROM Topic t WHERE t.publish_date = :publish_date")
     , @NamedQuery(name = "Topic.findByCategory", query = "SELECT t FROM Topic t WHERE t.category = :category")
-    , @NamedQuery(name = "Topic.findBySubCategory", query = "SELECT t FROM Topic t WHERE t.subCategory = :subCategory")
+    , @NamedQuery(name = "Topic.findBySubCategory", query = "SELECT t FROM Topic t WHERE t.id =:topicId AND t.subCategory = :subCategory")
     , @NamedQuery(name = "Topic.findByTopicPhoto", query = "SELECT t FROM Topic t WHERE t.topicPhoto = :topicPhoto")})
 public class Topic implements Serializable {
 

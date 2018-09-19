@@ -1,5 +1,6 @@
 package com.blog.model;
 
+import com.blog.model.comment.Comments;
 import java.io.Serializable;
 
 import java.util.Date;

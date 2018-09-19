@@ -1,5 +1,7 @@
 <%@include  file="start.jsp" %>
-
+<link href="<spring:url value="style/registration.css"/>" rel="stylesheet" type="text/css"/>
+</head>
+<body>
 <%@include  file="navbar.jsp" %>
 <!--Container za formu -->
 <div class="container my-form my-container my-container-width my-container-padding my-container-margin">

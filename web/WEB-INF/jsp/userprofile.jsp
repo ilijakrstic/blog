@@ -1,4 +1,7 @@
-<%@include file="start.jsp" %>	
+<%@include file="start.jsp" %>
+<link href="<spring:url value="style/userprofile.css"/>" rel="stylesheet" type="text/css"/>
+</head>
+<body>
 <%@include file="navbar.jsp"%>
 <div class="container mt-5">
     <div class="row justify-content-start">

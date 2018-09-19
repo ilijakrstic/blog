@@ -1,5 +1,7 @@
-package com.blog.model;
+package com.blog.model.comment;
 
+import com.blog.model.Topic;
+import com.blog.model.User;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 import javax.persistence.CascadeType;
@@ -15,6 +17,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Size;
 
 
 @NamedQueries({
@@ -40,6 +43,7 @@ public class Comments {
 
     //ostale kolone u comments
     @Column(name = "text")
+    @Size(min=1,message = "polje za komentar ne moze biti prazno!")
     private String commentText;
 
     @Column(name = "comment_time")
@@ -87,7 +91,7 @@ public class Comments {
         this.commentTime = commentTime;
     }
 
-    public String getCommentTimePassed() {
+      public String getCommentTimePassed() {
         
         //trenutno vreme
         Date now = new Date();
@@ -107,7 +111,7 @@ public class Comments {
         }
 
         //ukoliko je komentar objavljen pre manje od jednog sata i vise od jednog minuta
-        if (TimeUnit.MINUTES.convert(differenceMillies, TimeUnit.MILLISECONDS) > 1 && TimeUnit.HOURS.convert(differenceMillies, TimeUnit.MILLISECONDS) < 1) {
+        if (TimeUnit.MINUTES.convert(differenceMillies, TimeUnit.MILLISECONDS) >= 1 && TimeUnit.HOURS.convert(differenceMillies, TimeUnit.MILLISECONDS) < 1) {
             long minutes = TimeUnit.MINUTES.convert(differenceMillies, TimeUnit.MILLISECONDS);
   
             poruka.append(minutes);
@@ -157,5 +161,6 @@ public class Comments {
         return poruka.toString();
 
     }
+    
 
 }

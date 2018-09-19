@@ -1,4 +1,7 @@
 <%@include file="start.jsp" %>
+<link href="<spring:url value="style/readtopic.css"/>" rel="stylesheet" type="text/css"/>
+</head>
+<body>
 <%@include file="navbar.jsp" %>
 
 
