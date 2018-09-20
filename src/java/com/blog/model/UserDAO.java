@@ -71,11 +71,19 @@ public class UserDAO {
     }
 
     
-    public User getUserByUserNme(String username){
+    public User getUserByUserName(String username){
         
         Session session = sessionFactory.getCurrentSession();
         
         return  (User) session.getNamedQuery("User.findByUserName").setString("userName",username).uniqueResult();
           
+    }
+    
+    public void updateUser(User user){
+    
+        Session session = sessionFactory.openSession();
+        session.update(user);
+        
+        
     }
 }

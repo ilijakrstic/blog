@@ -18,7 +18,7 @@ public class UserController {
     @RequestMapping(value = "/user/{username}")
     public String getUserProfile(Model model, @PathVariable String username) {
 
-        User user = userDAO.getUserByUserNme(username);
+        User user = userDAO.getUserByUserName(username);
 
         if (user != null) {
             model.addAttribute("user", user);

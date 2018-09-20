@@ -24,7 +24,7 @@ public class IndexController {
     @Autowired
     UserDAO userDAO;
     
-    List blogTopicList = null;
+    List <Topic>blogTopicList = null;
     
     @RequestMapping(value={"/","/index"}, method=RequestMethod.GET)
     public String getIndex(@CookieValue(value = "userid", defaultValue = "0") String userid, @RequestParam(value = "page", defaultValue = "1")int page, @RequestParam(value="subcategory", required=false) String subcategory, @RequestParam(value="userEmail",required=false)String email,@RequestParam(value="userPassword", required=false)String password,ModelMap modelMap){
@@ -81,6 +81,8 @@ public class IndexController {
                 return "login";
             }
             }
+           
+           
             
 
         
@@ -90,6 +92,11 @@ public class IndexController {
              blogTopicList = topicDAO.getTopicBySubCategory(subcategory, page);
              
         }
+        
+        for (Topic object : blogTopicList) {
+           System.out.println(object.getLikesCollection().size());
+       }
+        
         
         int totalPage = (int) Math.ceil((double)topicDAO.ukupnoPodataka / 9);
         int endpage;

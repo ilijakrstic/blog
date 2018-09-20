@@ -50,4 +50,5 @@
     <bean id="topicDAO" class="com.blog.model.TopicDAO"/>
     <bean id="countryDAO" class="com.blog.model.CountryDAO"/> 
     <bean id="commentsDAO" class="com.blog.model.CommentsDAO"/> 
+    <bean id="likesDAO" class="com.blog.model.LikeDAO"/> 
 </beans>

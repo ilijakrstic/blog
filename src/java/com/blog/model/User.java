@@ -2,13 +2,16 @@ package com.blog.model;
 
 import com.blog.model.comment.Comments;
 import java.io.Serializable;
+import java.util.Collection;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,6 +26,7 @@ import javax.validation.constraints.NotNull;
 
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlTransient;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -41,6 +45,9 @@ import org.springframework.format.annotation.DateTimeFormat;
     , @NamedQuery(name = "User.findByPicture", query = "SELECT u FROM User u WHERE u.picture = :picture")
     })
 public class User implements Serializable {
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "userId")
+    private Collection<Likes> likesCollection;
 
     
     
@@ -236,6 +243,15 @@ public class User implements Serializable {
     @Override
     public String toString() {
         return "com.blog.model.User[ userId=" + userId + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Likes> getLikesCollection() {
+        return likesCollection;
+    }
+
+    public void setLikesCollection(Collection<Likes> likesCollection) {
+        this.likesCollection = likesCollection;
     }
 
   

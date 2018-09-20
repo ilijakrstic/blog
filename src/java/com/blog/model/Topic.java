@@ -2,11 +2,14 @@ package com.blog.model;
 
 import com.blog.model.comment.Comments;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -21,6 +24,7 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -42,6 +46,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Topic.findBySubCategory", query = "SELECT t FROM Topic t WHERE t.subCategory = :subCategory order by t.publish_date DESC")
     , @NamedQuery(name = "Topic.findByTopicPhoto", query = "SELECT t FROM Topic t WHERE t.topicPhoto = :topicPhoto")})
 public class Topic implements Serializable {
+
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "topicId")
+    private Collection<Likes> likesCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -230,6 +238,17 @@ public class Topic implements Serializable {
     @Override
     public String toString() {
         return "com.blog.model.Topic[ id=" + id + " ]";
+    }
+
+  
+
+    @XmlTransient
+    public Collection<Likes> getLikesCollection() {
+        return likesCollection;
+    }
+
+    public void setLikesCollection(Collection<Likes> likesCollection) {
+        this.likesCollection = likesCollection;
     }
     
 }
