@@ -25,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 @Controller
+
 public class TopicController {
 
     @Autowired
@@ -37,7 +38,8 @@ public class TopicController {
     public String readTopic(@PathVariable String id, @PathVariable String subcategory, Model model) {
 
         Topic topic = topicDAO.getTopicById(id);
-        List<Topic> releatedTopics = topicDAO.getReleatedTopics(subcategory, id);
+        List<Topic> releatedTopics = topicDAO.getReleatedTopics(subcategory);
+      
         model.addAttribute("topic", topic);
         model.addAttribute("releatedTopics", releatedTopics);
         model.addAttribute("style", "readtopic");

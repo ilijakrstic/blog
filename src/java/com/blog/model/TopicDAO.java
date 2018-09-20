@@ -80,10 +80,10 @@ public class TopicDAO {
     
     //metoda za povezane clanke
     
-    public List<Topic> getReleatedTopics(String subCategory,String id){
+    public List<Topic> getReleatedTopics(String subCategory){
         Session session = sessionFactory.getCurrentSession();
         
-        List<Topic> topics = (List<Topic>) session.getNamedQuery("Topic.findBySubCategory").setString("topicId", id).setString("subCategory", subCategory).setMaxResults(2).list();
+        List<Topic> topics = (List<Topic>) session.getNamedQuery("Topic.findBySubCategory").setString("subCategory", subCategory).setMaxResults(3).list();
         
         return topics;
     }

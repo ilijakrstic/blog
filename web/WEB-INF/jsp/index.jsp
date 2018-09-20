@@ -41,7 +41,7 @@
             <a href="/blog/index?subcategory=poznati" class="btn btn btn-outline-success subcategory btn-sm" role="button" >Poznati</a>
             <a href="/blog/index?subcategory=zanimljivosti" class="btn btn btn-outline-success subcategory btn-sm" role="button" >Zanimljivosti</a>
             <a href="/blog/index?subcategory=mladi" class="btn btn btn-outline-success subcategory btn-sm" role="button" >Mladi</a>
-            
+             <a href="/blog/index?subcategory=gejming" class="btn btn btn-outline-success subcategory btn-sm" role="button" >Gejming</a>
         </div>
 
                             
@@ -52,7 +52,7 @@
                 <div class="container d-flex justify-content-center text-center col " id="content-div" style="margin:0px">
                     <div class="row" style="text-decoration: none">
                         <c:forEach items="${topicList}" var="topic">
-                            <a href="topic/${topic.getCategory()}/${topic.getSubCategory()}/${topic.getId()}" >
+                            <a href="/blog/topic/${topic.getCategory()}/${topic.getSubCategory()}/${topic.getId()}" >
                                 <div class="col-lg-12 col-md-6 col-sm-12 d-flex  justify-content-center" style="padding-bottom: 20px">
                                     <div class="card text-center text-justify" style="width: 19rem; height: 25rem">
                                         <img class="card-img-top img-fluid" src="<spring:url value="${topic.getTopicPhoto()}"/>">
