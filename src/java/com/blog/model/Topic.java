@@ -48,7 +48,7 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Topic implements Serializable {
 
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "topicId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "topicId",fetch = FetchType.EAGER)
     private Collection<Likes> likesCollection;
 
     private static final long serialVersionUID = 1L;
