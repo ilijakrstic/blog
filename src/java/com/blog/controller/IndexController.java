@@ -30,8 +30,25 @@ public class IndexController {
     List <Topic>blogTopicList = null;
     
     @RequestMapping(value={"/","/index"}, method=RequestMethod.GET)
-    public String getIndex(@CookieValue(value = "userid", defaultValue = "0") String userid, @RequestParam(value = "page", defaultValue = "1")int page, @RequestParam(value="subcategory", required=false) String subcategory, @RequestParam(value="userEmail",required=false)String email,@RequestParam(value="userPassword", required=false)String password,ModelMap modelMap){
+    public String getIndex(HttpServletRequest request,@CookieValue(value = "userid", defaultValue = "0") String userid, @RequestParam(value = "page", defaultValue = "1")int page, @RequestParam(value="subcategory", required=false) String subcategory, @RequestParam(value="userEmail",required=false)String email,@RequestParam(value="userPassword", required=false)String password,ModelMap modelMap){
+        HttpSession session = request.getSession();
+        User user = (User)session.getAttribute("user");
+        if(user != null){
         
+            modelMap.addAttribute("profileOption", "<span class=\"navbar-text\">\n" +
+"                    <a href=\"/blog/user/"+user.getUserName()+"\" style=\"margin:-10px\" class=\"nav-link\">Profile</a>\n" +
+"                </span>");
+            
+        }else{
+        
+            modelMap.addAttribute("profileOption", "<span class=\"navbar-text\">\n" +
+"                    <a href=\"/blog/login\" style=\"margin:-10px\" class=\"nav-link\">Prijavi se</a>\n" +
+"                </span>\n" +
+"                <span class=\"navbar-text\">\n" +
+"                    <button onclick=\"location.href='/blog/registration'\" type=\"button\" class=\"btn btn-outline-success\">Registruj se</button>\n" +
+"                </span>");
+            
+        }
         
         
         
@@ -70,9 +87,9 @@ public class IndexController {
         Cookie user_id = null;
         
             
-           if(email != null && password != null){
-           
-                user = userDAO.getUserByEmail(email);
+        if(email != null && password != null){
+            user = userDAO.getUserByEmail(email);
+
             if (user == null) {
                 modelMap.addAttribute("emailError", "Pogresan e-mail");
                 return "login";
@@ -81,11 +98,18 @@ public class IndexController {
                 session.setAttribute("user", user);
                 user_id = new Cookie("userid", user.getUserId().toString());
                 response.addCookie(user_id);
+
+                //Kreiranje button-a za "profil"
+                modelMap.addAttribute("profileOption", "<span class=\"navbar-text\">\n" +"<a href=\"/blog/user/"+user.getUserName()+"\" style=\"margin:-10px\" class=\"nav-link\">Profile</a>\n" +"</span>");
+
+
             }else{
                 modelMap.addAttribute("passwordError", "Pogresan password");
                 return "login";
             }
-            }
+        }else{
+            return "login";
+        }
            
            
             
@@ -116,6 +140,7 @@ public class IndexController {
         modelMap.addAttribute("endpage", endpage);
         modelMap.addAttribute("currentPage", page);
         modelMap.addAttribute("topicList", blogTopicList);
+        modelMap.addAttribute("username", user.getUserName());
     
         return "index";
            
