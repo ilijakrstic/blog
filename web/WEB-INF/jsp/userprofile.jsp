@@ -3,8 +3,8 @@
 </head>
 <body>
 <%@include file="navbar.jsp"%>
-<div class="container mt-5">
-    <div class="row justify-content-start">
+<div class="container main-container">  
+    <div class="row justify-content-start pt-5 pl-5  profile-content">
         <!-- Kolona za sliku-->
         <div class="col-sm-3 mr-5" >
             <div class="mb-5 profilna" >
@@ -13,7 +13,7 @@
                     Promeni profilnu sliku  <i class="fa fa-camera-retro ml-1" style="font-size:22px"></i><input type="file" style="display: none;">
                 </label>
             </div>
-            <div class="mb-3">
+            <div class="mb-5">
                 <h5 class="mb-3">Kratak opis o korisniku</h5>
                 <p>${user.getBio()}</p>
             </div>
@@ -141,4 +141,5 @@
             </div><!--kraj nav tabs content-->
         </div>
     </div>
+</div>
     <%@include file="end.jsp" %>

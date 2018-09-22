@@ -84,11 +84,9 @@ public class User implements Serializable {
     @Column(name="bio")
     @Size(min=30,message = "Ovo polje mora da sadrzi minimum 30 karaktera(pustite masti na valju)")
     private String bio;
-    @Column(name="city")
-    @Size(min=2,max = 250,message = "ovo polje je obavezno")
-    private String city;
+    
     @Column(name="country")
-    @Size(min=2,max = 250,message = "ovo polje je obavezno")
+    @Size(min=2,max = 250,message = "polje je obavezno")
     private String country;
     
     @OneToMany(mappedBy = "user")
@@ -180,13 +178,7 @@ public class User implements Serializable {
         this.bio = bio;
     }
 
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
+  
 
     public String getCountry() {
         return country;

@@ -1,16 +1,16 @@
 .profilna:hover{
     background-color:#343A40;
     color:white;
-    
+
 }
 #ime::after{
-	content: 'Novi Sad SRB';
-	font-size: 12px;
-	margin-left: 1em;
+    content: 'Novi Sad SRB';
+    font-size: 12px;
+    margin-left: 1em;
 }
 
 .zanimanje{
-	color:#2ecc71;
+    color:#2ecc71;
 }
 
 
@@ -29,20 +29,29 @@
 }
 
 .nav-tabs .nav-link {
- color:  #2ecc71;
-       padding-top: .2em;
+    color:  #2ecc71;
+    padding-top: .2em;
     padding-bottom: .2em;
 }
 
 
 #zanimanja{
-	list-style: none;padding-left: 0;
+    list-style: none;padding-left: 0;
 }
 
 #myTabContent a{
-	color:  #2ecc71;
+    color:  #2ecc71;
 }
 
+
+body{
+    background-image: url("../img/architecture-buildings-city-313782.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+ 
+}
 .btn-file {
     position: relative;
     overflow: hidden;
@@ -67,8 +76,16 @@
     font-size: 24px;
 }
 
+.profile-content{
+    background-color: rgb(249, 250, 252,0.9);
+
+}
+
 @media(min-width: 1000px){
-	.info-margin{
-		margin-left: 3em;
-	}
+    .info-margin{
+        margin-left: 3em;
+    }
+    .main-container{
+        padding: 3em 10%;
+    }
 }
