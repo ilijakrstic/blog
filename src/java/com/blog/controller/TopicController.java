@@ -1,7 +1,11 @@
 package com.blog.controller;
 
+import com.blog.model.LikeDAO;
+import com.blog.model.Likes;
 import com.blog.model.Topic;
 import com.blog.model.TopicDAO;
+import com.blog.model.User;
+import com.blog.model.UserDAO;
 import com.blog.randomStringGenerator.pattern.Chars;
 import com.blog.randomStringGenerator.pattern.Size;
 import com.blog.randomStringGenerator.pattern.StringPatterns;
@@ -9,6 +13,8 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,6 +36,12 @@ public class TopicController {
 
     @Autowired
     TopicDAO topicDAO;
+    
+    @Autowired
+    UserDAO userDAO;
+    
+    @Autowired
+    LikeDAO likesDAO;
 
     private static final Logger logger = LoggerFactory
             .getLogger(TopicController.class);
@@ -65,6 +77,30 @@ public class TopicController {
         
 
         return "newtopic";
+    }
+    
+    
+    @RequestMapping(value="/topic/like", method = RequestMethod.POST)
+    @ResponseBody
+    public String topicLike(@RequestParam(value="user_id", required=true)String user_id, @RequestParam(value="topic_id", required=true)String topic_id){
+    
+        int userId = Integer.parseInt(user_id);
+        
+        
+        User user = userDAO.getUserById(Integer.parseInt(user_id));
+        Topic topic = topicDAO.getTopicById(topic_id);
+        Likes like = new Likes();
+        like.setUserId(user);
+        like.setTopicId(topic);
+        
+        Collection<Likes> likeCollection = new ArrayList();
+        likeCollection.add(like);
+        user.setLikesCollection(likeCollection);
+        userDAO.updateUser(user);
+        
+        
+        
+        return "liked";
     }
     
     
