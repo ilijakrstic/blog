@@ -1,8 +1,4 @@
-.profilna:hover{
-    background-color:#343A40;
-    color:white;
 
-}
 #ime::after{
     content: 'Novi Sad SRB';
     font-size: 12px;

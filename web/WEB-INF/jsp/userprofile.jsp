@@ -9,9 +9,7 @@
         <div class="col-sm-3 mr-5" >
             <div class="mb-5 profilna" >
                 <img src="${user.getPicture()}" class="img-fluid mx-auto d-block">
-                <label class="btn btn-default btn-file ml-3">
-                    Promeni profilnu sliku  <i class="fa fa-camera-retro ml-1" style="font-size:22px"></i><input type="file" style="display: none;">
-                </label>
+              
             </div>
             <div class="mb-5">
                 <h5 class="mb-3">Kratak opis o korisniku</h5>
@@ -66,7 +64,7 @@
                                 Adresa stanovanja:
                             </div>
                             <div class="col-sm-5">
-                                ${user.getCity()},${user.getCountry()}
+                              
                             </div>
                         </div>
                         <div class="row mb-3">
