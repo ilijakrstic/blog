@@ -1,6 +1,8 @@
-package com.blog.model;
+package com.blog.model.comment;
 
 import com.blog.model.Topic;
+import com.blog.model.Topic;
+import com.blog.model.User;
 import com.blog.model.User;
 import com.blog.model.comment.Comments;
 import java.io.Serializable;

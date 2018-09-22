@@ -4,7 +4,7 @@
 }
 .comment-text{
     margin-bottom: .4em;
-   
+
 }
 
 .like-btn{
@@ -25,27 +25,23 @@
     border-bottom:1px solid #dfe6e9;padding-bottom: .5em
 }
 
-
-.like_dislike{
-
- cursor: pointer;
- display: inline;
-
+.fas{
+    font-size: 14px;
+    cursor: pointer;
+    display: inline;
 }
- #like{
-     font-size: 14px;
- }
- #dislike{
-     font-size: 14px;
- }
+
+.like-dislike-text{
+    font-size:14px;
+}
 .liked{
     color:green;
 }
-.disliked{
+.dissliked{
     color:red;
 }
 .odgovor{
-    display: block;
+    display: inline;
     font-size: 15px;
     color:#28A745;
 }
@@ -53,6 +49,9 @@
     text-decoration: none;
     color:#28A745;
 }
-#odgovor-forma{
+.odgovor-forma{
     display: none;
+}
+#like-text{
+    display: inline;
 }

@@ -3,6 +3,7 @@ package com.blog.model.comment;
 import com.blog.model.Topic;
 import com.blog.model.User;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -49,6 +51,9 @@ public class Comments {
     @Column(name = "comment_time")
     @Temporal(TemporalType.TIMESTAMP)
     private Date commentTime;
+    
+    @OneToMany(mappedBy = "comment")
+    List<CommentRating> commentRatings;
 
     public int getComment_id() {
         return comment_id;

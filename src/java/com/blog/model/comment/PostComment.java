@@ -9,6 +9,17 @@ public class PostComment {
     private String time;
     private String username;
     private String userphoto;
+    private int commentId;
+
+    public int getCommentId() {
+        return commentId;
+    }
+
+    public void setCommentId(int commentId) {
+        this.commentId = commentId;
+    }
+    
+    
 
     public String getText() {
         return text;

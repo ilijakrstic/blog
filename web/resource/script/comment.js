@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
 
-
+    //postavljanje novog komentara
     $("#forma").submit(function (event) {
 
         event.preventDefault();
@@ -46,26 +46,20 @@ $(document).ready(function () {
 
 
     //like
-    $(".like_dislike").click(function (event) {
-        var like_dislike = event.target.id;
-
-        if (like_dislike == 'like') {
-           $(this).first().addClass("liked");
-           $(this).next().first().removeClass("disliked");
-           
-
-        } else {
-            $(this).first().addClass("disliked");
-            $(this).prev().first().removeClass("liked");
-        }
-
-
+    $("#like").click(function (event) {
+        like(event);
     });
 
-    
-    $(".odgovor").click(function(event){
+    //disslike
+    $("#disslike").click(function (event) {
+        disslike(event);
+    });
+
+
+    $(".odgovor").click(function (event) {
         event.preventDefault();
         $(this).next().slideToggle(700);
+
     });
 
 
@@ -78,49 +72,82 @@ function addNewComment(data) {
     $("#sendComment").removeAttr("disabled");
     $("#text").val("");
 
-    $("#new_comm").addClass("media comment");
-
-    $("<img/>", {
-        class: 'align-self-start mr-3 user_pict',
-        src: data.userphoto,
-        alt: 'new_user_picture'
-    }).appendTo("#new_comm");
 
     $("<div/>", {
-        id: "media_body",
-        class: "media-body pt-3"
-    }).appendTo("#new_comm");
+        id: "comment_" + data.commentId,
+        class: "media comment"
+    }).appendTo("#new_comments");
 
+    $("<img/>", {
+        src: data.userphoto,
+        class: "align-self-center mr-3 user_pict"
+    }).appendTo("#comment_" + data.commentId);
+
+    $("<div/>", {
+        id: "comment_body" + data.commentId,
+        class: "media-body pt-3"
+
+    }).appendTo("#comment_" + data.commentId);
     $("<h5/>", {
         class: "mt-3 mb-0 user_name mr-1",
         text: data.username
-    }).appendTo("#media_body");
-
+    }).appendTo("#comment_body" + data.commentId);
     $("<span/>", {
         class: "comm_time",
-        style: "margin-bottom: 1em",
         text: data.time
-    }).appendTo("#media_body");
-
+    }).appendTo("#comment_body" + data.commentId);
+  
     $("<p/>", {
         class: "comment-text",
         text: data.text
-    }).appendTo("#media_body");
+    }).appendTo("#comment_body" + data.commentId);
 
-    $("<img/>", {
-        id: 'like_btn',
-        class: 'like-btn',
-        src: 'img/lik.png',
-        alt: "like-button"
-    }).appendTo("#media_body");
-    $("<img/>", {
-        id: 'dislike_btn',
-        class: 'dislike-btn',
-        src: 'img/dislike.png',
-        alt: "dislike-button"
-    }).appendTo("#media_body");
-    $("<a/>", {
-        href: "#",
-        html: "odgovori"
-    }).appendTo("#media_body");
+    
+
+
+}//kraj new commenta
+
+
+
+function like(event) {
+
+    $(event.target).addClass("liked");
+    $(event.target).next().next().removeClass("dissliked");
+
+
+    //ajax
+    /*
+     $.ajax({
+     headers: {
+     'Accept': 'application/json',
+     'Content-Type': 'application/json'
+     },
+     url: "../ajaxcall/postlike",
+     contentType: 'application/json',
+     
+     data: {like: like, commId: $("#commentId").val()},
+     
+     timeout: 100000,
+     success: function (data) {
+     
+     console.log(data);
+     },
+     error: function (e) {
+     
+     console.log("ERROR : ", e.responseText);
+     
+     },
+     done: function (data) {
+     console.log(data);
+     }
+     
+     
+     });
+     */
+
+}
+
+function disslike(event) {
+    $(event.target).addClass("dissliked");
+    $(event.target).prev().prev().removeClass("liked");
 }

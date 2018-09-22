@@ -1,5 +1,6 @@
 package com.blog.model;
 
+import com.blog.model.comment.CommentRating;
 import com.blog.model.comment.Comments;
 import java.io.Serializable;
 
@@ -92,6 +93,9 @@ public class User implements Serializable {
     
     @OneToMany(mappedBy = "user")
     private List<Comments> comments;
+    
+    @OneToMany(mappedBy = "user_comm_rating")
+    private List<CommentRating> commentRatings;
     
     public User() {
     }
@@ -207,6 +211,14 @@ public class User implements Serializable {
 
     public void setComments(List<Comments> comments) {
         this.comments = comments;
+    }
+
+    public List<CommentRating> getCommentRatings() {
+        return commentRatings;
+    }
+
+    public void setCommentRatings(List<CommentRating> commentRatings) {
+        this.commentRatings = commentRatings;
     }
 
     

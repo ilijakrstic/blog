@@ -78,4 +78,5 @@ public class UserDAO {
         return  (User) session.getNamedQuery("User.findByUserName").setString("userName",username).uniqueResult();
           
     }
+
 }
