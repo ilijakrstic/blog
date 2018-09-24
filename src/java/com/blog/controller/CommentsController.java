@@ -1,7 +1,7 @@
 package com.blog.controller;
 
-import com.blog.model.comment.Comments;
-import com.blog.model.comment.CommentsDAO;
+import com.blog.model.Comments;
+import com.blog.model.CommentsDAO;
 
 import com.blog.model.Topic;
 import com.blog.model.TopicDAO;

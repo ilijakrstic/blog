@@ -1,10 +1,9 @@
-package com.blog.model.comment;
+package com.blog.model;
 
 import com.blog.model.Topic;
 import com.blog.model.Topic;
 import com.blog.model.User;
 import com.blog.model.User;
-import com.blog.model.comment.Comments;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;

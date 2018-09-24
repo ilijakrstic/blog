@@ -1,5 +1,6 @@
 package com.blog.model.comment;
 
+import com.blog.model.Comments;
 import com.blog.model.User;
 import java.util.Date;
 import java.util.List;

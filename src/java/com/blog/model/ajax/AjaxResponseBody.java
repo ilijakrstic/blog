@@ -1,6 +1,6 @@
 package com.blog.model.ajax;
 
-import com.blog.model.comment.Comments;
+import com.blog.model.Comments;
 
 public class AjaxResponseBody {
     private String msg;
