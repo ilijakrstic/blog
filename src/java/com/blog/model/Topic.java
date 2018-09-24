@@ -100,7 +100,7 @@ public class Topic implements Serializable {
     @Column(name = "topic_photo")
     private String topicPhoto;
     
-    @OneToMany(mappedBy = "topic")
+    @OneToMany(mappedBy = "topic",fetch = FetchType.LAZY)
     private List<Comments> comments;
     
     public Topic() {

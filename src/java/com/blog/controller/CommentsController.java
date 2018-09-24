@@ -10,9 +10,10 @@ import com.blog.model.UserDAO;
 import com.blog.model.ajax.AjaxResponseBody;
 import com.blog.model.comment.CommentRating;
 import com.blog.model.comment.CommentRatingDAO;
-import com.blog.model.comment.PostComment;
+import com.blog.model.comment.JsonComment;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
@@ -49,52 +50,70 @@ public class CommentsController {
     CommentRatingDAO commentRatingDAO;
 
     @RequestMapping(value = "/topic/{id}", method = RequestMethod.GET)
-    public String getTopicByID(Model model, @PathVariable String id, @CookieValue(value = "userid", defaultValue = "0") String userid) {
-
-        List<Comments> comments = commentsDAO.getCommentsByTopic(id);
-        
-        
-       
-
-        model.addAttribute("comments", comments);
-        
+    public String getTopicByID(Model model, @PathVariable String id) {
 
         Topic topic = topicDAO.getTopicById(id);
 
         model.addAttribute("topic", topic);
-        model.addAttribute("style", "comment");
+
         return "demoTopicComments";
     }
 
-    @RequestMapping(value = "/ajaxcall/postcomment", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<PostComment> postTopic(@RequestBody PostComment comment, Model model, @CookieValue(value = "userid") String userid) throws JsonProcessingException {
+    @RequestMapping(value = "/ajaxcall/getcomments", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public List<JsonComment> getComments(@RequestParam("offset") int offset, @RequestParam("maxresult") int maxresult, @RequestParam("topicId") String topicId
+            ) {
 
-        Topic topic = topicDAO.getTopicById(comment.getTopicId());
-        System.out.println(comment.getUserId());
-      
-      
-        String commentText = comment.getText();
+        List<Comments> comments = commentsDAO.getCommentsByTopic(topicId, offset, maxresult);
 
-        Comments comm = commentsDAO.addComment(commentText, userDAO.getUserById(Integer.valueOf(userid)), topic);
+        List<JsonComment> jsonComments = new ArrayList<>();
 
-        comment.setTime(comm.getCommentTimePassed());
-        comment.setUsername(comm.getUsers().getUserName());
-        comment.setUserphoto(comm.getUsers().getPicture());
-        comment.setCommentId(comm.getComment_id());
+        for (int i = 0; i < comments.size(); i++) {
+            JsonComment jsonComm = new JsonComment();
+            jsonComm.setText(comments.get(i).getCommentText());
+            jsonComm.setCommentId(comments.get(i).getComment_id());
+            jsonComm.setTime(comments.get(i).getCommentTimePassed());
+            jsonComm.setTopicId(topicId);
+            jsonComm.setUserId(comments.get(i).getUsers().getUserId());
+            jsonComm.setUsername(comments.get(i).getUsers().getUserName());
+            jsonComm.setUserphoto(comments.get(i).getUsers().getPicture());
+            jsonComments.add(jsonComm);
+        }
 
-        ObjectMapper mapper = new ObjectMapper();
+        System.out.println(comments.size());
 
-        String response = mapper.writeValueAsString(comment);
+        return jsonComments;
 
-        return new ResponseEntity<PostComment>(comment, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/ajaxcall/postcomment", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public JsonComment postTopic(@RequestParam("topicId") String topicId, @RequestParam("text") String text, @CookieValue(value = "userid", defaultValue = "0") String userid) throws JsonProcessingException {
+
+        if (!userid.equals("0")) {
+            Topic topic = topicDAO.getTopicById(topicId);
+
+            Comments comm = commentsDAO.addComment(text, userDAO.getUserById(Integer.valueOf(userid)), topic);
+            JsonComment jsonComment = new JsonComment();
+
+            jsonComment.setTime(comm.getCommentTimePassed());
+            jsonComment.setUsername(comm.getUsers().getUserName());
+            jsonComment.setUserphoto(comm.getUsers().getPicture());
+            jsonComment.setCommentId(comm.getComment_id());
+            jsonComment.setText(text);
+
+           return jsonComment;
+        }
+
+        else return null;
+
     }
 
     //insert like or dislike
     @RequestMapping(value = "/ajaxcall/postlike", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public void postLike(@RequestParam("like") int like, @RequestParam("commId") String commId,@ModelAttribute("user") User user) {
+    public void postLike(@RequestParam("like") int like, @RequestParam("commId") String commId, @ModelAttribute("user") User user) {
 
-      //    System.out.println(user);
-
+        //    System.out.println(user);
 //        Comments comm = commentsDAO.getCommentById(Integer.valueOf(commId));
 //
 //        if (like > 1 || like < -1) {
@@ -104,6 +123,5 @@ public class CommentsController {
 //        CommentRating commRating = commentRatingDAO.insertLike(comm, user, like);
 //
 //        return new ResponseEntity<Integer>(commRating.getLike(), HttpStatus.OK);
-
     }
 }

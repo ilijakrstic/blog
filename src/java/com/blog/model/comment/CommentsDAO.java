@@ -25,11 +25,11 @@ public class CommentsDAO {
     @Autowired
     SessionFactory sessionFactory;
 
-    public List<Comments> getCommentsByTopic(String topicId) {
+    public List<Comments> getCommentsByTopic(String topicId,int offset,int maxresult) {
 
-        Session session = sessionFactory.getCurrentSession();
+        Session session = sessionFactory.openSession();
 
-        List<Comments> comments = session.getNamedQuery("Comments.findAll").setString("topicID", topicId).list();
+        List<Comments> comments = session.getNamedQuery("Comments.findAll").setString("topicID", topicId).setFirstResult(offset).setMaxResults(maxresult).list();
 
         return comments;
     }

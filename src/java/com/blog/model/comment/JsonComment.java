@@ -1,11 +1,11 @@
 package com.blog.model.comment;
 
 
-public class PostComment {
+public class JsonComment {
 
     private String text;
     private String topicId;
-    private String userId;
+    private int userId;
     private String time;
     private String username;
     private String userphoto;
@@ -37,11 +37,11 @@ public class PostComment {
         this.topicId = topicId;
     }
 
-    public String getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 

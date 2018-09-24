@@ -1,34 +1,54 @@
 $(document).ready(function () {
 
+    var $offset = 0;
+
+    $(".comments").hide();
+    $(".show_more_comms").hide();
+    //ucitavnje prvih 10 komentara
+    $("#show_comments").click(function (event) {
+        event.preventDefault();
+
+        console.log($("#topicId").val());
+
+
+      
+        //pozivanje funkcije za izvlacenje 10 komentara
+        ajaxCall($offset,"#comms");
+        $(".show_more_comms").show();
+        $offset+=2;
+
+    });
+
+    //ucitavanje dodatnih 10 komentara
+
+    $("#show_10_more").click(function (event){
+        event.preventDefault();
+        $("#show_10_more").prop("disabled",true);
+        console.log($offset);
+        ajaxCall($offset,"#comms");
+        $offset+=2;
+         $("#show_10_more").prop("disabled",false);
+    });
 
     //postavljanje novog komentara
     $("#forma").submit(function (event) {
 
         event.preventDefault();
 
-        var poruka = {};
-        poruka["userId"] = $("#userId").val();
-        poruka["topicId"] = $("#topicId").val();
-        poruka["text"] = $("#text").val();
-
 
 
         $("#sendComment").prop("disabled", true);
 
         $.ajax({
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
+
             url: "../ajaxcall/postcomment",
+            data: {topicId: $("#topicId").val(), text: $("#text").val()},
             contentType: 'application/json',
-            method: "POST",
-            data: JSON.stringify(poruka),
 
-            timeout: 100000,
-            success: function (data) {
+            success: function (comment) {
 
-                addNewComment(data);
+                loadComments(comment,"#new_comm");
+                $("#sendComment").prop("disabled", false);
             },
             error: function (e) {
 
@@ -63,50 +83,88 @@ $(document).ready(function () {
     });
 
 
+
+
 });
 
 
+function ajaxCall(offset,div) {
+    $.ajax({
+        url: "../ajaxcall/getcomments",
+        data: {offset: offset, maxresult: 2, topicId: $("#topicId").val()},
+        type: "GET",
+        contentType: 'application/json',
 
-function addNewComment(data) {
+        success: function (comments) {
 
-    $("#sendComment").removeAttr("disabled");
-    $("#text").val("");
+            $("#show_comments").hide();
+            $(".comments").show();
 
+            
 
+            $.each(comments, function (i, comment) {
+                loadComments(comment,div);
+            });
+        },
+        error: function (resp) {
+            console.log(resp);
+        }
+    });
+}
+
+function loadComments(comment,div) {
+    console.log(comment.userphoto);
     $("<div/>", {
-        id: "comment_" + data.commentId,
-        class: "media comment"
-    }).appendTo("#new_comments");
+        id: "comment_" + comment.commentId,
+        class: "container comment"
 
+    }).appendTo(div);
+    $("<div/>", {
+        id: "comment-row_" + comment.commentId,
+        class: "row justify-content-start comment-row"
+
+    }).appendTo("#comment_" + comment.commentId);
     $("<img/>", {
-        src: data.userphoto,
-        class: "align-self-center mr-3 user_pict"
-    }).appendTo("#comment_" + data.commentId);
-
+        src: comment.userphoto,
+        class: "user-pict mr-2"
+    }).appendTo("#comment-row_" + comment.commentId);
     $("<div/>", {
-        id: "comment_body" + data.commentId,
-        class: "media-body pt-3"
-
-    }).appendTo("#comment_" + data.commentId);
-    $("<h5/>", {
-        class: "mt-3 mb-0 user_name mr-1",
-        text: data.username
-    }).appendTo("#comment_body" + data.commentId);
+        id: "comm-col_" + comment.commentId,
+        class: "col-md-10"
+    }).appendTo("#comment-row_" + comment.commentId);
+    $("<div/>", {
+        id: "row_user_" + comment.commentId,
+        class: "row user"
+    }).appendTo("#comm-col_" + comment.commentId);
+    $("<a/>", {
+        href: "/blog/user/" + comment.username,
+        class: "mr-1",
+        text: comment.username
+    }).appendTo("#row_user_" + comment.commentId);
     $("<span/>", {
         class: "comm_time",
-        text: data.time
-    }).appendTo("#comment_body" + data.commentId);
-  
+        text: comment.time
+    }).appendTo("#row_user_" + comment.commentId);
+    $("<div/>", {
+        id: "row-comment-text" + comment.commentId,
+        class: "row comment-text"
+    }).appendTo("#comm-col_" + comment.commentId);
     $("<p/>", {
-        class: "comment-text",
-        text: data.text
-    }).appendTo("#comment_body" + data.commentId);
+        text: comment.text
+    }).appendTo("#row-comment-text" + comment.commentId);
+    $("<div/>", {
+        id: "likes_" + comment.commentId,
+        class: "row"
+    }).appendTo("#comm-col_" + comment.commentId);
+    $("<i/>", {
+        class: "far fa-thumbs-up"
 
-    
+    }).appendTo("#likes_" + comment.commentId);
+    $("<i/>", {
+        class: "far fa-thumbs-down ml-3"
 
-
-}//kraj new commenta
-
+    }).appendTo("#likes_" + comment.commentId);
+}
 
 
 function like(event) {
@@ -151,3 +209,5 @@ function disslike(event) {
     $(event.target).addClass("dissliked");
     $(event.target).prev().prev().removeClass("liked");
 }
+
+
