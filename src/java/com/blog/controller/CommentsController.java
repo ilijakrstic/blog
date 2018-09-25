@@ -7,27 +7,23 @@ import com.blog.model.Topic;
 import com.blog.model.TopicDAO;
 import com.blog.model.User;
 import com.blog.model.UserDAO;
-import com.blog.model.ajax.AjaxResponseBody;
-import com.blog.model.comment.CommentRating;
+
 import com.blog.model.comment.CommentRatingDAO;
 import com.blog.model.comment.JsonComment;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -62,7 +58,7 @@ public class CommentsController {
     @RequestMapping(value = "/ajaxcall/getcomments", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public List<JsonComment> getComments(@RequestParam("offset") int offset, @RequestParam("maxresult") int maxresult, @RequestParam("topicId") String topicId
-            ) {
+    ) {
 
         List<Comments> comments = commentsDAO.getCommentsByTopic(topicId, offset, maxresult);
 
@@ -88,12 +84,14 @@ public class CommentsController {
 
     @RequestMapping(value = "/ajaxcall/postcomment", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public JsonComment postTopic(@RequestParam("topicId") String topicId, @RequestParam("text") String text, @CookieValue(value = "userid", defaultValue = "0") String userid) throws JsonProcessingException {
-
-        if (!userid.equals("0")) {
+    public JsonComment postTopic(@RequestParam("topicId") String topicId, @RequestParam("text") String text,HttpServletRequest request) throws JsonProcessingException {
+        
+        HttpSession session = request.getSession();
+        User user = (User)session.getAttribute("user");
+        if (user!=null) {
             Topic topic = topicDAO.getTopicById(topicId);
 
-            Comments comm = commentsDAO.addComment(text, userDAO.getUserById(Integer.valueOf(userid)), topic);
+            Comments comm = commentsDAO.addComment(text,user, topic);
             JsonComment jsonComment = new JsonComment();
 
             jsonComment.setTime(comm.getCommentTimePassed());
@@ -102,10 +100,10 @@ public class CommentsController {
             jsonComment.setCommentId(comm.getComment_id());
             jsonComment.setText(text);
 
-           return jsonComment;
+            return jsonComment;
+        } else {
+            return null;
         }
-
-        else return null;
 
     }
 

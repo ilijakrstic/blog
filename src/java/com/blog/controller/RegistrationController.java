@@ -1,6 +1,5 @@
 package com.blog.controller;
 
-import com.blog.model.CountryDAO;
 import com.blog.model.User;
 import com.blog.model.UserDAO;
 import java.util.ArrayList;
@@ -20,13 +19,12 @@ public class RegistrationController {
 
     @Autowired
     UserDAO userDAO;
-    @Autowired
-    CountryDAO countryDAO;
+
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String getRegistration(Model model) {
         model.addAttribute("user", new User());
-        model.addAttribute("countries", countryDAO.getAll());
+      
         model.addAttribute("style", "registration");
         return "registration";
     }
@@ -36,7 +34,7 @@ public class RegistrationController {
 
         //ukoliko forma nije validna vraca registraciju sa ispisanim greskama
         if (result.hasErrors()) {
-            model.addAttribute("countries", countryDAO.getAll());
+     
             return "registration";
         }
 
@@ -55,7 +53,7 @@ public class RegistrationController {
             if (!(userDAO.emailIsValid(user.getEmail()))) {
                 model.addAttribute("emailExists", "Korisnik sa unetom email adresom vec postoji");
             }
-            model.addAttribute("countries", countryDAO.getAll());
+ 
             return "registration";
         }
 

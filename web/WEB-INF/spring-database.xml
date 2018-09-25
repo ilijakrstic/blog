@@ -48,7 +48,7 @@
           class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
     <bean id="userDAO" class="com.blog.model.UserDAO"/> 
     <bean id="topicDAO" class="com.blog.model.TopicDAO"/>
-    <bean id="countryDAO" class="com.blog.model.CountryDAO"/> 
+  
  
     <bean id="likesDAO" class="com.blog.model.LikeDAO"/> 
     <bean id="commentsDAO" class="com.blog.model.CommentsDAO"/> 

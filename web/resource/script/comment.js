@@ -4,30 +4,28 @@ $(document).ready(function () {
 
     $(".comments").hide();
     $(".show_more_comms").hide();
+
+
     //ucitavnje prvih 10 komentara
     $("#show_comments").click(function (event) {
         event.preventDefault();
 
-        console.log($("#topicId").val());
-
-
-      
         //pozivanje funkcije za izvlacenje 10 komentara
-        ajaxCall($offset,"#comms");
+        ajaxCall($offset, "#comms",2);
         $(".show_more_comms").show();
-        $offset+=2;
+        $offset += 2;
 
     });
 
     //ucitavanje dodatnih 10 komentara
 
-    $("#show_10_more").click(function (event){
+    $("#show_10_more").click(function (event) {
         event.preventDefault();
-        $("#show_10_more").prop("disabled",true);
-        console.log($offset);
-        ajaxCall($offset,"#comms");
-        $offset+=2;
-         $("#show_10_more").prop("disabled",false);
+        $("#show_10_more").prop("disabled", true);
+        
+        ajaxCall($offset, "#comms",2);
+        $offset += 2;
+        $("#show_10_more").prop("disabled", false);
     });
 
     //postavljanje novog komentara
@@ -46,9 +44,11 @@ $(document).ready(function () {
             contentType: 'application/json',
 
             success: function (comment) {
-
-                loadComments(comment,"#new_comm");
-                $("#sendComment").prop("disabled", false);
+                    
+                    loadComments(comment, "#new_comm");
+                    $("#text").val("");
+                    $("#sendComment").prop("disabled", false);
+                
             },
             error: function (e) {
 
@@ -88,10 +88,10 @@ $(document).ready(function () {
 });
 
 
-function ajaxCall(offset,div) {
+function ajaxCall(offset, div,maxresult) {
     $.ajax({
         url: "../ajaxcall/getcomments",
-        data: {offset: offset, maxresult: 2, topicId: $("#topicId").val()},
+        data: {offset: offset, maxresult: maxresult, topicId: $("#topicId").val()},
         type: "GET",
         contentType: 'application/json',
 
@@ -100,10 +100,14 @@ function ajaxCall(offset,div) {
             $("#show_comments").hide();
             $(".comments").show();
 
-            
-
+            console.log(comments.length);
+                
+            if(comments.length < maxresult){
+                $("#show_10_more").hide();
+                
+            }
             $.each(comments, function (i, comment) {
-                loadComments(comment,div);
+                loadComments(comment, div);
             });
         },
         error: function (resp) {
@@ -112,7 +116,7 @@ function ajaxCall(offset,div) {
     });
 }
 
-function loadComments(comment,div) {
+function loadComments(comment, div) {
     console.log(comment.userphoto);
     $("<div/>", {
         id: "comment_" + comment.commentId,
@@ -126,11 +130,11 @@ function loadComments(comment,div) {
     }).appendTo("#comment_" + comment.commentId);
     $("<img/>", {
         src: comment.userphoto,
-        class: "user-pict mr-2"
+        class: "user-pict mr-2 rounded"
     }).appendTo("#comment-row_" + comment.commentId);
     $("<div/>", {
         id: "comm-col_" + comment.commentId,
-        class: "col-md-10"
+        class: "col-10"
     }).appendTo("#comment-row_" + comment.commentId);
     $("<div/>", {
         id: "row_user_" + comment.commentId,
@@ -150,6 +154,7 @@ function loadComments(comment,div) {
         class: "row comment-text"
     }).appendTo("#comm-col_" + comment.commentId);
     $("<p/>", {
+        class: "comment-text",
         text: comment.text
     }).appendTo("#row-comment-text" + comment.commentId);
     $("<div/>", {

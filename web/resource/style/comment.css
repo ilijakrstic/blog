@@ -7,6 +7,13 @@
 .comm_time{
     font-size: 13px;
 }
+.comment-text {
+    margin-bottom: .2em;
+
+}
+.row_user{
+    margin-bottom: 0;padding-bottom: 0;
+}
 .comment-text p{
     font-size: 15px;
 }
@@ -49,4 +56,17 @@
 }
 .fa-thumbs-down{
     font-size: 13px;
+}
+#text{
+    border-color: transparent;
+    border-bottom-color: #7f8c8d;
+}
+#text:focus{
+
+    border-bottom-color: #2ecc71;
+    box-shadow: none;
+    outline: 0 none;
+}
+#text:read-only{
+  border-bottom-color: transparent;
 }

@@ -16,6 +16,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,8 +49,17 @@ public class TopicController {
             .getLogger(TopicController.class);
 
     @RequestMapping(value = "/topic/{category}/{subcategory}/{id}")
-    public String readTopic(@PathVariable String id, @PathVariable String subcategory, Model model) {
-
+    public String readTopic(@PathVariable String id, @PathVariable String subcategory, Model model,HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        User user = (User)session.getAttribute("user");
+        
+        boolean login = false;
+        if(user != null){
+            login= true;
+        }
+        
+        model.addAttribute("login",login);
+        
         Topic topic = topicDAO.getTopicById(id);
         List<Topic> releatedTopics = topicDAO.getReleatedTopics(subcategory);
       

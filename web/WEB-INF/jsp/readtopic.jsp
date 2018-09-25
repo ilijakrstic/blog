@@ -1,5 +1,6 @@
 <%@include file="start.jsp" %>
 <link href="<spring:url value="style/readtopic.css"/>" rel="stylesheet" type="text/css"/>
+<link href="<spring:url value="style/comment.css"/>" rel="stylesheet" type="text/css"/>
 </head>
 <body>
     <%@include file="navbar.jsp" %>
@@ -26,6 +27,48 @@
                     <p >${topic.getContent()}</p>
                 </div>
 
+
+                <div class="container mb-5">
+                    <a href="#" id="show_comments">Komentari</a>
+                </div>
+
+                <div class="container comments justify-content-center mb-3">
+
+
+                    <form class="mb-5" id="forma">
+                        <div class="form-group">
+                            
+                            <textarea id="text" class="form-control" rows="1" id="comment" required="true" placeholder='postavi komentar' <c:if test = "${!login}">
+                                      readonly="true" 
+                                </c:if>></textarea>
+                        </div>
+                        <input type="hidden" id="topicId" value="${topic.getId()}">
+
+                        <button type="submit" id="sendComment" class="btn btn-success float-right"<c:if test = "${!login}">
+                                style='display:none'
+                            </c:if>>Postavi</button>
+                        <c:if test = "${!login}">
+                            <span>Da bi ste postavili komentar morate biti <button onclick="location.href='/blog/login'"  class="btn btn-success btn-sm ml-1 mr-1">Ulogovani</button> 
+                                nemate profil? <button onclick="location.href='/blog/registration'" class="btn btn-danger btn-sm ml-1 ">Registrujte se</button></span>
+                            </c:if>
+                    </form>
+
+                    <div id="new_comm">
+
+                    </div>
+                    <div id="comms">
+
+                    </div>
+                    <div class="show_more_comms row justify-content-center mt-2">
+                        <div class="col-md-2">
+                            <button class="btn btn-outline-success" id="show_10_more">Prikazi jos komentara</button>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
             </div>
 
             <!-- Povezani clanci -->
@@ -47,5 +90,5 @@
             </div>
         </div>
     </div>
-
+    <script src="<spring:url value="script/comment.js"/>"></script>
     <%@include file="end.jsp" %>
