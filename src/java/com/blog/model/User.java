@@ -88,7 +88,7 @@ public class User implements Serializable {
     private String picture;
     
     @Column(name="bio")
-    @Size(min=30,message = "Ovo polje mora da sadrzi minimum 30 karaktera(pustite masti na valju)")
+    
     private String bio;
     
     @Column(name="country")

@@ -10,6 +10,8 @@ public class JsonComment {
     private String username;
     private String userphoto;
     private int commentId;
+    private long likes;
+    private long disslikes;
 
     public int getCommentId() {
         return commentId;
@@ -67,6 +69,22 @@ public class JsonComment {
 
     public void setUserphoto(String userphoto) {
         this.userphoto = userphoto;
+    }
+
+    public long getLikes() {
+        return likes;
+    }
+
+    public void setLikes(long likes) {
+        this.likes = likes;
+    }
+
+    public long getDisslikes() {
+        return disslikes;
+    }
+
+    public void setDisslikes(long disslikes) {
+        this.disslikes = disslikes;
     }
     
     

@@ -2,6 +2,7 @@ package com.blog.model.comment;
 
 import com.blog.model.Comments;
 import com.blog.model.User;
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -18,13 +19,16 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @NamedQueries({
-    @NamedQuery(name = "CommentRating.findByComment", query = "SELECT cr FROM CommentRating cr where cr.comment.comment_id  = :commentId")})
+    @NamedQuery(name = "CommentRating.findByComment", query = "SELECT cr FROM CommentRating cr join cr.comment_cr c where c.comment_id  = :commentId")
+    , @NamedQuery(name = "CommentRating.isAlredyLiked", query = "SELECT cr FROM CommentRating cr join cr.user_comm_rating u join cr.comment_cr c  WHERE u.userId = :userId and c.comment_id = :commId")
+    , @NamedQuery(name = "CommentRating.countLikes", query = "SELECT count(*) FROM CommentRating cr inner join cr.comment_cr c  WHERE c.comment_id = :commId and cr.likes = :like")})
 @Entity
 @Table(name="comment_rating")
-public class CommentRating {
+public class CommentRating implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="coment_ratring_id")
     private int id;
     
     //korisnik koji je lajkovao
@@ -36,7 +40,7 @@ public class CommentRating {
     //komentar koji je lajkovan
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="comment_id")
-    private Comments comment;
+    private Comments comment_cr;
     
     
     //0 je bez lajkova 1 je like -1 je disslike
@@ -64,11 +68,11 @@ public class CommentRating {
     }
 
     public Comments getComment() {
-        return comment;
+        return comment_cr;
     }
 
     public void setComment(Comments comment) {
-        this.comment = comment;
+        this.comment_cr = comment;
     }
 
     public int getLike() {

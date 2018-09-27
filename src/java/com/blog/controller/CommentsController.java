@@ -7,6 +7,7 @@ import com.blog.model.Topic;
 import com.blog.model.TopicDAO;
 import com.blog.model.User;
 import com.blog.model.UserDAO;
+import com.blog.model.comment.CommentRating;
 
 import com.blog.model.comment.CommentRatingDAO;
 import com.blog.model.comment.JsonComment;
@@ -15,6 +16,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -84,14 +86,14 @@ public class CommentsController {
 
     @RequestMapping(value = "/ajaxcall/postcomment", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public JsonComment postTopic(@RequestParam("topicId") String topicId, @RequestParam("text") String text,HttpServletRequest request) throws JsonProcessingException {
-        
+    public JsonComment postTopic(@RequestParam("topicId") String topicId, @RequestParam("text") String text, HttpServletRequest request) throws JsonProcessingException {
+
         HttpSession session = request.getSession();
-        User user = (User)session.getAttribute("user");
-        if (user!=null) {
+        User user = (User) session.getAttribute("user");
+        if (user != null) {
             Topic topic = topicDAO.getTopicById(topicId);
 
-            Comments comm = commentsDAO.addComment(text,user, topic);
+            Comments comm = commentsDAO.addComment(text, user, topic);
             JsonComment jsonComment = new JsonComment();
 
             jsonComment.setTime(comm.getCommentTimePassed());
@@ -109,17 +111,52 @@ public class CommentsController {
 
     //insert like or dislike
     @RequestMapping(value = "/ajaxcall/postlike", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public void postLike(@RequestParam("like") int like, @RequestParam("commId") String commId, @ModelAttribute("user") User user) {
+    @ResponseBody
+    public JsonComment postLike(@RequestParam("like") int like, @RequestParam("commId") int commId, HttpServletRequest request, HttpServletResponse response) {
 
-        //    System.out.println(user);
-//        Comments comm = commentsDAO.getCommentById(Integer.valueOf(commId));
-//
-//        if (like > 1 || like < -1) {
-//            return new ResponseEntity<String>("bad request", HttpStatus.BAD_REQUEST);
-//        }
-//
-//        CommentRating commRating = commentRatingDAO.insertLike(comm, user, like);
-//
-//        return new ResponseEntity<Integer>(commRating.getLike(), HttpStatus.OK);
+        HttpSession session = request.getSession();
+
+        //ukoliko je user ulogovan
+        if (session.getAttribute("user") != null) {
+
+            JsonComment jsonComment = new JsonComment();
+
+            Comments comment = commentsDAO.getCommentById(commId);
+
+            System.out.println("Ulogovan");
+            User user = (User) session.getAttribute("user");
+            CommentRating alredyLikedByUser = commentRatingDAO.isAlredyLikedByUser(user.getUserId(), commId, like);
+
+            //ako user nije rate comment ubacuje se vrednost
+            if (alredyLikedByUser == null) {
+                commentRatingDAO.insertLike(comment, user, like);
+                String[] split = commentRatingDAO.countRating(commId).split(",");
+                long likes = Long.valueOf(split[0]);
+                long disslikes = Long.valueOf(split[1]);
+
+                jsonComment.setLikes(likes);
+                jsonComment.setDisslikes(disslikes);
+                response.setStatus(HttpServletResponse.SC_OK);
+                return jsonComment;
+            } 
+            //ukoliko je rate onda se update
+            else {
+                commentRatingDAO.updateLike(alredyLikedByUser, like);
+                String[] split = commentRatingDAO.countRating(commId).split(",");
+                long likes = Long.valueOf(split[0]);
+                long disslikes = Long.valueOf(split[1]);
+
+                jsonComment.setLikes(likes);
+                jsonComment.setDisslikes(disslikes);
+                response.setStatus(HttpServletResponse.SC_OK);
+                return jsonComment;
+            }
+
+        }
+
+        System.out.println("Nije logovan");
+        //ako nije ulogovan vraca -1
+        response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+        return null;
     }
 }

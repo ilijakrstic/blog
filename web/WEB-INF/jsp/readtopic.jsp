@@ -1,10 +1,13 @@
 <%@include file="start.jsp" %>
 <link href="<spring:url value="style/readtopic.css"/>" rel="stylesheet" type="text/css"/>
 <link href="<spring:url value="style/comment.css"/>" rel="stylesheet" type="text/css"/>
+
 </head>
 <body>
     <%@include file="navbar.jsp" %>
-
+    
+    
+    
 
     <!-- main container-->
     <div class="container-fluid mt-5 topic-container">
@@ -49,7 +52,7 @@
                             </c:if>>Postavi</button>
                         <c:if test = "${!login}">
                             <span>Da bi ste postavili komentar morate biti <button onclick="location.href='/blog/login'"  class="btn btn-success btn-sm ml-1 mr-1">Ulogovani</button> 
-                                nemate profil? <button onclick="location.href='/blog/registration'" class="btn btn-danger btn-sm ml-1 ">Registrujte se</button></span>
+                               </span>
                             </c:if>
                     </form>
 

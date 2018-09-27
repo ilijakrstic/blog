@@ -54,7 +54,7 @@ public class Comments {
     @Temporal(TemporalType.TIMESTAMP)
     private Date commentTime;
     
-    @OneToMany(mappedBy = "comment")
+    @OneToMany(mappedBy = "comment_cr")
     List<CommentRating> commentRatings;
 
     public int getComment_id() {
