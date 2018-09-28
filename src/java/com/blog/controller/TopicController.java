@@ -61,7 +61,7 @@ public class TopicController {
         model.addAttribute("login",login);
         
         Topic topic = topicDAO.getTopicById(id);
-        List<Topic> releatedTopics = topicDAO.getReleatedTopics(subcategory);
+        List<Topic> releatedTopics = topicDAO.getReleatedTopics(subcategory,id);
       
         model.addAttribute("topic", topic);
         model.addAttribute("releatedTopics", releatedTopics);

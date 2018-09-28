@@ -42,7 +42,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Topic.findByAuthor", query = "SELECT t FROM Topic t WHERE t.author = :author")
     , @NamedQuery(name = "Topic.findByDate", query = "SELECT t FROM Topic t WHERE t.publish_date = :publish_date")
     , @NamedQuery(name = "Topic.findByCategory", query = "SELECT t FROM Topic t WHERE t.category = :category")
-    , @NamedQuery(name = "Topic.findBySubCategory", query = "SELECT t FROM Topic t WHERE t.subCategory = :subCategory order by t.publish_date DESC")
+    , @NamedQuery(name = "Topic.findBySubCategory", query = "SELECT t FROM Topic t WHERE t.subCategory = :subCategory AND t.id not in :topicId order by t.publish_date DESC")
     , @NamedQuery(name = "Topic.findByTopicPhoto", query = "SELECT t FROM Topic t WHERE t.topicPhoto = :topicPhoto")})
 public class Topic implements Serializable {
 

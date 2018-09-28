@@ -60,7 +60,8 @@
 
                     </div>
                     <div id="comms">
-
+                        
+                        
                     </div>
                     <div class="show_more_comms row justify-content-center mt-2">
                         <div class="col-md-2">
@@ -81,9 +82,12 @@
                 <div class="card mb-5 ml-5">
                     <h3 class="card-title pt-2 pb-2" style="text-align: center">Povezani clanci</h3>
                     <c:forEach items="${releatedTopics}" var="rel">
-                        <div class="card-body ml-4 mr-4" >
-                            <img  src="..${rel.getTopicPhoto()}" alt="povezani clanak slika" class="img-fluid mb-3">
-                            <p>${rel.getDescription()}</p>
+                        <div class="card-body ml-4 mr-4">
+                          
+                            <img  src="..${rel.getTopicPhoto()}" alt="povezani clanak slika" class="img-fluid mb-3"  />
+                         
+                            <h5 class="mb-2" >${rel.getTitle()}</h5>
+                            <input type="hidden" value="${rel.getId()}"/>
                             <button class="btn btn-outline-success">Saznaj vise</button>
                         </div>
                     </c:forEach>
@@ -94,4 +98,5 @@
         </div>
     </div>
     <script src="<spring:url value="script/comment.js"/>"></script>
+     <script src="<spring:url value="script/jquery.miranda.min.js"/>"></script>
     <%@include file="end.jsp" %>

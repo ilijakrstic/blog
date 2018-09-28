@@ -91,6 +91,7 @@ function ajaxCall(offset, div, maxresult) {
 
             }
             $.each(comments, function (i, comment) {
+                console.log("comm id: " + comment.commentId + " likes: " +comment.likes+ " disslikes : " +comment.disslikes);
                 loadComments(comment, div);
             });
         },
@@ -101,7 +102,7 @@ function ajaxCall(offset, div, maxresult) {
 }
 
 function loadComments(comment, div) {
-    console.log(comment.userphoto);
+    
     $("<div/>", {
         id: "comment_" + comment.commentId,
         class: "container comment"
@@ -145,16 +146,25 @@ function loadComments(comment, div) {
         id: "likes_" + comment.commentId,
         class: "row"
     }).appendTo("#comm-col_" + comment.commentId);
-
+    $("<span/>", {
+        id:"numb_of_likes_"+comment.commentId,
+        class:"comment_likes mr-1",
+        text:comment.likes
+    }).appendTo("#likes_" + comment.commentId);
     $("<i/>", {
         id: "like",
-        class: "far fa-thumbs-up"
+        class: "far fa-thumbs-up mr-2"
         , onclick: "like(event)"
     }).appendTo("#likes_" + comment.commentId);
 
+    $("<span/>", {
+        id:"numb_of_disslikes_"+comment.commentId,
+        class:"comment_likes mr-1",
+        text:comment.disslikes
+    }).appendTo("#likes_" + comment.commentId);
     $("<i/>", {
         id: "disslike",
-        class: "far fa-thumbs-down ml-3"
+        class: "far fa-thumbs-down"
         , onclick: "like(event)"
     }).appendTo("#likes_" + comment.commentId);
     $("<input/>", {
@@ -165,17 +175,15 @@ function loadComments(comment, div) {
 
 
 function like(event) {
-
+    var $commId = $(event.target).parent().children().last().val();
     switch (event.target.id) {
         case "like":
-
-            var $commId = $(event.target).next().next().val();
+            
             likeAjaxCall(1, $commId, event);
 
             break;
         case "disslike":
 
-            var $commId = $(event.target).next().val();
             likeAjaxCall(-1, $commId, event);
 
             break;
@@ -194,21 +202,21 @@ function likeAjaxCall(value, commentId, event) {
             switch (event.target.id) {
                 case "like":
                     $(event.target).addClass("liked");
-                    $(event.target).next().removeClass("dissliked");
-
-                    alert(likes.likes);
-
+                    $(event.target).next().next().removeClass("dissliked");
+                    $("#numb_of_likes_"+likes.commentId).html(likes.likes);
+                    console.log(likes.commentId);
+                    console.log(likes.likes);
                     break;
                 case "disslike":
                     $(event.target).addClass("dissliked");
-                    $(event.target).prev().removeClass("liked");
-
-                    alert(likes.disslikes);
+                    $(event.target).prev().prev().removeClass("liked");
+                    $("#numb_of_disslikes_"+likes.commentId).html(likes.disslikes);
+                    console.log(likes.commentId);
 
                     break;
             }
         },
-       
+
         error: function (resp) {
             console.log(resp);
         }

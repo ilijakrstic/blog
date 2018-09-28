@@ -53,11 +53,13 @@
 }
 .fa-thumbs-up{
     font-size: 13px;
+    cursor: pointer;
 }
 .fa-thumbs-down{
     font-size: 13px;
+    cursor: pointer;
 }
-.rating_counts{
+.comment_likes{
     font-size: 13px;
 }
 #text{

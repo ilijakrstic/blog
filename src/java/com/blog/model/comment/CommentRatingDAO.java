@@ -68,6 +68,20 @@ public class CommentRatingDAO {
         sb.append(numberOfDisslikes);
         return sb.toString();
     }
-    
-   
+
+    public List<JsonComment> countRatingForListOfComments(List<JsonComment> jsonComm) {
+        Session session = sessionFactory.getCurrentSession();
+        for (JsonComment jc : jsonComm) {
+
+            Long numberOfLikes = (Long) session.getNamedQuery("CommentRating.countLikes").setInteger("commId", jc.getCommentId()).setInteger("like", 1).uniqueResult();
+            Long numberOfDisslikes = (Long) session.getNamedQuery("CommentRating.countLikes").setInteger("commId", jc.getCommentId()).setInteger("like", -1).uniqueResult();
+
+            jc.setLikes(numberOfLikes);
+            jc.setDisslikes(numberOfDisslikes);
+        }
+
+        return jsonComm;
+
+    }
+
 }

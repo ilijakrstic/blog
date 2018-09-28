@@ -77,10 +77,12 @@ public class CommentsController {
             jsonComm.setUserphoto(comments.get(i).getUsers().getPicture());
             jsonComments.add(jsonComm);
         }
+        
+        List<JsonComment> jsonCommentsFinal = commentRatingDAO.countRatingForListOfComments(jsonComments);
 
-        System.out.println(comments.size());
+    
 
-        return jsonComments;
+        return jsonCommentsFinal;
 
     }
 
@@ -136,10 +138,10 @@ public class CommentsController {
 
                 jsonComment.setLikes(likes);
                 jsonComment.setDisslikes(disslikes);
+                jsonComment.setCommentId(commId);
                 response.setStatus(HttpServletResponse.SC_OK);
                 return jsonComment;
-            } 
-            //ukoliko je rate onda se update
+            } //ukoliko je rate onda se update
             else {
                 commentRatingDAO.updateLike(alredyLikedByUser, like);
                 String[] split = commentRatingDAO.countRating(commId).split(",");
@@ -148,6 +150,7 @@ public class CommentsController {
 
                 jsonComment.setLikes(likes);
                 jsonComment.setDisslikes(disslikes);
+                jsonComment.setCommentId(commId);
                 response.setStatus(HttpServletResponse.SC_OK);
                 return jsonComment;
             }
